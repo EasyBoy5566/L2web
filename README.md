@@ -10,6 +10,7 @@
 - **課堂實作**：DIC-1
 - **學生/開發者**：EasyBoy5566
 - **示範網站**：[https://easyboy5566.github.io/L2web/](https://easyboy5566.github.io/L2web/)
+- **資料庫程式碼**：[https://github.com/EasyBoy5566/L2web](https://github.com/EasyBoy5566/L2web)
 
 ---
 
