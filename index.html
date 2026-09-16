@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EasyBoy5566 的個人儀表板 - 台北即時時間與中央氣象署全台 22 縣市天氣">
-    <title>EasyBoy5566 | 台北即時時間 & 全台氣象儀表板</title>
+    <meta name="description" content="EasyBoy5566 的個人儀表板 - 台北即時時間、台灣地圖氣象視覺化與中央氣象署即時衛星雷達圖資">
+    <title>EasyBoy5566 | 台灣氣象地圖 & 即時圖資儀表板</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -16,23 +16,23 @@
         }
 
         :root {
-            --bg-primary: #090a16;
+            --bg-primary: #080914;
             --bg-card: rgba(255, 255, 255, 0.04);
-            --bg-card-hover: rgba(255, 255, 255, 0.07);
+            --bg-card-hover: rgba(255, 255, 255, 0.08);
             --border-glass: rgba(255, 255, 255, 0.08);
-            --border-glass-hover: rgba(168, 85, 247, 0.4);
-            --text-primary: #f3f4f9;
-            --text-secondary: rgba(243, 244, 249, 0.65);
-            --text-muted: rgba(243, 244, 249, 0.4);
+            --border-glass-hover: rgba(168, 85, 247, 0.5);
+            --text-primary: #f5f6fc;
+            --text-secondary: rgba(245, 246, 252, 0.68);
+            --text-muted: rgba(245, 246, 252, 0.42);
             --accent-indigo: #6366f1;
             --accent-purple: #a855f7;
             --accent-pink: #ec4899;
             --accent-cyan: #06b6d4;
             --accent-amber: #f59e0b;
             --accent-emerald: #10b981;
-            --glow-1: rgba(99, 102, 241, 0.25);
-            --glow-2: rgba(168, 85, 247, 0.25);
-            --glow-cyan: rgba(6, 182, 212, 0.25);
+            --glow-1: rgba(99, 102, 241, 0.28);
+            --glow-2: rgba(168, 85, 247, 0.28);
+            --glow-cyan: rgba(6, 182, 212, 0.28);
         }
 
         body {
@@ -43,7 +43,7 @@
             overflow-x: hidden;
             overflow-y: auto;
             position: relative;
-            padding: 40px 20px 80px;
+            padding: 36px 20px 80px;
         }
 
         /* Custom Scrollbar */
@@ -54,14 +54,14 @@
             background: var(--bg-primary);
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.16);
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(168, 85, 247, 0.5);
+            background: rgba(168, 85, 247, 0.6);
         }
 
-        /* Animated Background Orbs */
+        /* Ambient Animated Orbs */
         .bg-gradient {
             position: fixed;
             inset: 0;
@@ -73,44 +73,44 @@
         .bg-gradient .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.4;
-            animation: float 16s ease-in-out infinite;
+            filter: blur(130px);
+            opacity: 0.38;
+            animation: float 18s ease-in-out infinite;
         }
 
         .bg-gradient .orb:nth-child(1) {
-            width: 550px;
-            height: 550px;
+            width: 580px;
+            height: 580px;
             background: var(--accent-indigo);
-            top: -10%;
-            left: -5%;
-            animation-duration: 18s;
-        }
-
-        .bg-gradient .orb:nth-child(2) {
-            width: 450px;
-            height: 450px;
-            background: var(--accent-purple);
-            bottom: -10%;
-            right: -5%;
-            animation-delay: -5s;
+            top: -12%;
+            left: -8%;
             animation-duration: 20s;
         }
 
-        .bg-gradient .orb:nth-child(3) {
-            width: 400px;
-            height: 400px;
-            background: var(--accent-cyan);
-            top: 40%;
-            right: 25%;
-            animation-delay: -10s;
+        .bg-gradient .orb:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-purple);
+            bottom: -15%;
+            right: -8%;
+            animation-delay: -6s;
             animation-duration: 22s;
+        }
+
+        .bg-gradient .orb:nth-child(3) {
+            width: 440px;
+            height: 440px;
+            background: var(--accent-cyan);
+            top: 45%;
+            left: 35%;
+            animation-delay: -12s;
+            animation-duration: 24s;
         }
 
         @keyframes float {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(40px, -40px) scale(1.06); }
-            66% { transform: translate(-30px, 30px) scale(0.95); }
+            33% { transform: translate(45px, -35px) scale(1.08); }
+            66% { transform: translate(-35px, 25px) scale(0.94); }
         }
 
         .grain {
@@ -122,15 +122,14 @@
             pointer-events: none;
         }
 
-        /* Container */
         .container {
             position: relative;
             z-index: 2;
-            max-width: 1280px;
+            max-width: 1320px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 36px;
+            gap: 32px;
         }
 
         /* Hero / Header Card */
@@ -138,7 +137,7 @@
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
             border-radius: 28px;
-            padding: 44px 48px;
+            padding: 38px 44px;
             backdrop-filter: blur(40px) saturate(1.4);
             -webkit-backdrop-filter: blur(40px) saturate(1.4);
             box-shadow:
@@ -148,30 +147,30 @@
             display: grid;
             grid-template-columns: auto 1fr auto;
             align-items: center;
-            gap: 40px;
+            gap: 36px;
             animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(18px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .hero-left {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: 22px;
         }
 
         .avatar {
-            width: 84px;
-            height: 84px;
-            border-radius: 24px;
+            width: 80px;
+            height: 80px;
+            border-radius: 22px;
             background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple), var(--accent-pink));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 34px;
+            font-size: 32px;
             font-weight: 700;
             color: #fff;
             box-shadow: 0 12px 30px var(--glow-1);
@@ -183,7 +182,7 @@
             content: '';
             position: absolute;
             inset: -3px;
-            border-radius: 26px;
+            border-radius: 24px;
             background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple), var(--accent-pink));
             z-index: -1;
             opacity: 0.5;
@@ -203,7 +202,7 @@
             font-weight: 600;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .hero-meta h1 {
@@ -218,19 +217,19 @@
 
         .hero-meta p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             margin-top: 4px;
         }
 
         /* Clock Component */
         .hero-clock {
             text-align: right;
-            padding-left: 30px;
+            padding-left: 28px;
             border-left: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .clock-label {
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             color: var(--text-secondary);
             letter-spacing: 1.5px;
             text-transform: uppercase;
@@ -238,7 +237,7 @@
             align-items: center;
             justify-content: flex-end;
             gap: 8px;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .clock-dot {
@@ -257,7 +256,7 @@
 
         .clock-time {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 2.8rem;
+            font-size: 2.7rem;
             font-weight: 700;
             letter-spacing: 2px;
             background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan) 100%);
@@ -268,14 +267,14 @@
         }
 
         .clock-date {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: var(--text-secondary);
-            margin-top: 6px;
+            margin-top: 4px;
             font-weight: 400;
         }
 
         .seconds-bar-wrapper {
-            margin-top: 10px;
+            margin-top: 8px;
             width: 100%;
             height: 4px;
             background: rgba(255, 255, 255, 0.06);
@@ -293,16 +292,15 @@
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
+            gap: 16px;
         }
 
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
             border-radius: 20px;
-            padding: 20px 24px;
+            padding: 18px 22px;
             backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
             display: flex;
             align-items: center;
             gap: 16px;
@@ -316,8 +314,8 @@
         }
 
         .stat-icon {
-            width: 48px;
-            height: 48px;
+            width: 46px;
+            height: 46px;
             border-radius: 14px;
             display: flex;
             align-items: center;
@@ -332,7 +330,7 @@
         .stat-icon.rain { background: rgba(236, 72, 153, 0.15); color: #f472b6; }
 
         .stat-info .stat-title {
-            font-size: 0.78rem;
+            font-size: 0.74rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -340,19 +338,641 @@
         }
 
         .stat-info .stat-value {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: var(--text-primary);
             font-family: 'JetBrains Mono', sans-serif;
         }
 
         .stat-info .stat-sub {
-            font-size: 0.76rem;
+            font-size: 0.74rem;
             color: var(--text-secondary);
             margin-top: 2px;
         }
 
-        /* Weather Control Bar */
+        /* Navigation Mode Tabs */
+        .view-mode-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 10px 14px;
+            backdrop-filter: blur(24px);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .mode-tabs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mode-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-secondary);
+            padding: 10px 20px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .mode-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .mode-btn.active {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            color: #ffffff;
+            box-shadow: 0 4px 18px var(--glow-1);
+        }
+
+        .cwa-status-pill {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding-right: 8px;
+        }
+
+        .cwa-pill-badge {
+            background: rgba(6, 182, 212, 0.12);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(6, 182, 212, 0.28);
+            border-radius: 8px;
+            padding: 3px 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        /* View Content Sections */
+        .view-section {
+            display: none;
+            animation: fadeIn 0.4s ease both;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        /* ========================================================
+           SECTION 1: TAIWAN MAP VIEW
+        ======================================================== */
+        .taiwan-map-layout {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .map-card-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            padding: 24px;
+            backdrop-filter: blur(30px);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .map-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .map-card-header h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .map-legend {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-color {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        /* SVG Map Styling */
+        .taiwan-svg-box {
+            position: relative;
+            width: 100%;
+            height: 640px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            user-select: none;
+        }
+
+        .taiwan-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.15));
+        }
+
+        .taiwan-island-path {
+            fill: rgba(30, 32, 60, 0.7);
+            stroke: rgba(168, 85, 247, 0.5);
+            stroke-width: 2.2;
+            stroke-dasharray: 1200;
+            stroke-dashoffset: 0;
+            filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.25));
+            transition: all 0.3s ease;
+        }
+
+        .taiwan-grid-line {
+            stroke: rgba(255, 255, 255, 0.04);
+            stroke-width: 1;
+            stroke-dasharray: 4 6;
+        }
+
+        .island-inset-box {
+            fill: rgba(255, 255, 255, 0.02);
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 1;
+            rx: 12;
+        }
+
+        .inset-label {
+            font-size: 11px;
+            fill: rgba(255, 255, 255, 0.4);
+            font-family: inherit;
+        }
+
+        /* County Map Node / Marker */
+        .county-node {
+            cursor: pointer;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .county-node:hover {
+            transform: scale(1.18);
+        }
+
+        .county-node.active .node-pin-circle {
+            fill: #ec4899;
+            stroke: #ffffff;
+            stroke-width: 2.5;
+            filter: drop-shadow(0 0 12px #ec4899);
+        }
+
+        .county-node.active .node-chip-bg {
+            stroke: var(--accent-pink);
+            stroke-width: 1.8;
+            fill: rgba(236, 72, 153, 0.25);
+        }
+
+        .node-pin-pulse {
+            animation: nodePulse 2.4s infinite ease-out;
+            transform-origin: center;
+        }
+
+        @keyframes nodePulse {
+            0% { r: 4; opacity: 0.9; }
+            100% { r: 16; opacity: 0; }
+        }
+
+        .node-chip-bg {
+            fill: rgba(16, 18, 38, 0.85);
+            stroke: rgba(255, 255, 255, 0.15);
+            stroke-width: 1;
+            rx: 7;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .county-node:hover .node-chip-bg {
+            stroke: var(--accent-purple);
+            fill: rgba(168, 85, 247, 0.25);
+        }
+
+        .node-text-name {
+            font-size: 11.5px;
+            font-weight: 600;
+            fill: #ffffff;
+            font-family: 'Noto Sans TC', sans-serif;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+
+        .node-text-temp {
+            font-size: 10.5px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            text-anchor: middle;
+            pointer-events: none;
+        }
+
+        /* Map Detail Side Panel */
+        .map-side-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            padding: 32px 28px;
+            backdrop-filter: blur(30px);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            position: sticky;
+            top: 24px;
+        }
+
+        .selected-county-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        .selected-badge-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .region-tag {
+            font-size: 0.75rem;
+            padding: 3px 10px;
+            border-radius: 6px;
+            background: rgba(99, 102, 241, 0.16);
+            color: #a5b4fc;
+            font-weight: 600;
+        }
+
+        .selected-county-name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+        }
+
+        .selected-weather-icon {
+            font-size: 3.4rem;
+            filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.35));
+        }
+
+        .selected-temp-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .selected-avg-temp {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1;
+            background: linear-gradient(135deg, #ffffff 40%, var(--accent-purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .selected-temp-range {
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .selected-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .panel-metric-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .panel-metric-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .panel-metric-val {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Forecast 3-Periods list in side panel */
+        .forecast-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: -10px;
+        }
+
+        .panel-periods-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .panel-period-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .panel-period-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .period-item-time {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .period-item-wx {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .period-item-temp {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .quick-county-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: -6px;
+        }
+
+        .quick-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 5px 10px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-chip:hover, .quick-chip.active {
+            background: var(--accent-purple);
+            color: #ffffff;
+            border-color: transparent;
+        }
+
+        /* ========================================================
+           SECTION 2: LIVE IMAGERY HUB (衛星/雷達圖資)
+        ======================================================== */
+        .imagery-hub-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 28px;
+            padding: 32px 36px;
+            backdrop-filter: blur(30px);
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .imagery-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .imagery-title-group h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .imagery-title-group p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .imagery-tabs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .img-tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 0.84rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            outline: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .img-tab-btn:hover {
+            background: rgba(255, 255, 255, 0.09);
+            color: var(--text-primary);
+        }
+
+        .img-tab-btn.active {
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-cyan));
+            color: #ffffff;
+            border-color: transparent;
+            box-shadow: 0 4px 15px var(--glow-cyan);
+        }
+
+        .imagery-display-stage {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background: #02030a;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .live-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: opacity 0.3s ease;
+            filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.8));
+        }
+
+        .image-overlay-info {
+            position: absolute;
+            bottom: 18px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px;
+            background: rgba(8, 9, 20, 0.75);
+            backdrop-filter: blur(14px);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+        }
+
+        .img-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #4ade80;
+            font-weight: 600;
+        }
+
+        .image-refresh-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-primary);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .image-refresh-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Imagery Gallery Grid */
+        .imagery-thumbnails-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .thumb-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .thumb-card:hover, .thumb-card.active {
+            border-color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .thumb-img-wrapper {
+            width: 100%;
+            height: 110px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .thumb-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumb-info .thumb-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .thumb-info .thumb-sub {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* ========================================================
+           SECTION 3: CARDS LIST VIEW (舊有列表卡片)
+        ======================================================== */
         .controls-card {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
@@ -364,6 +984,7 @@
             justify-content: space-between;
             gap: 20px;
             flex-wrap: wrap;
+            margin-bottom: 24px;
         }
 
         .region-tabs {
@@ -419,7 +1040,7 @@
             font-size: 0.86rem;
             color: var(--text-primary);
             outline: none;
-            width: 170px;
+            width: 180px;
             transition: all 0.2s ease;
             font-family: inherit;
         }
@@ -469,56 +1090,18 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Weather Section Header */
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: -16px;
-        }
-
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .section-title h2 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            letter-spacing: -0.3px;
-        }
-
-        .cwa-tag {
-            font-size: 0.72rem;
-            padding: 3px 10px;
-            border-radius: 8px;
-            background: rgba(6, 182, 212, 0.12);
-            border: 1px solid rgba(6, 182, 212, 0.25);
-            color: var(--accent-cyan);
-            font-weight: 500;
-        }
-
-        .sync-info {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        /* Weather Grid */
         .weather-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
             gap: 20px;
         }
 
-        /* Weather Card */
         .weather-card {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
             border-radius: 22px;
             padding: 24px;
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
@@ -527,28 +1110,11 @@
             gap: 16px;
         }
 
-        .weather-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-            transition: opacity 0.3s ease;
-            opacity: 0;
-        }
-
         .weather-card:hover {
             transform: translateY(-4px);
             background: var(--bg-card-hover);
             border-color: var(--border-glass-hover);
             box-shadow: 0 16px 36px -12px var(--glow-2);
-        }
-
-        .weather-card:hover::before {
-            opacity: 1;
-            background: linear-gradient(90deg, var(--accent-indigo), var(--accent-purple), var(--accent-pink));
         }
 
         .card-top {
@@ -561,7 +1127,6 @@
             font-size: 1.35rem;
             font-weight: 700;
             color: #ffffff;
-            letter-spacing: -0.2px;
         }
 
         .location-info .location-region {
@@ -573,7 +1138,6 @@
         .weather-status-icon {
             font-size: 2.2rem;
             line-height: 1;
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
         }
 
         .temp-row {
@@ -596,7 +1160,6 @@
             background: linear-gradient(135deg, #ffffff 40%, var(--accent-purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             line-height: 1;
         }
 
@@ -614,19 +1177,8 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        .temp-high {
-            color: #f87171;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
-
-        .temp-low {
-            color: #60a5fa;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-        }
+        .temp-high { color: #f87171; }
+        .temp-low { color: #60a5fa; }
 
         .weather-desc-badge {
             display: inline-flex;
@@ -641,7 +1193,6 @@
             width: fit-content;
         }
 
-        /* Metrics Row */
         .card-metrics {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -660,21 +1211,12 @@
             font-size: 0.72rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .metric-val {
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
 
         .metric-val.rain {
             color: #38bdf8;
             font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
         }
 
         .comfort-chip {
@@ -686,7 +1228,6 @@
             width: fit-content;
         }
 
-        /* 3-Period Forecast Expandable */
         .forecast-periods {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -694,7 +1235,6 @@
             background: rgba(0, 0, 0, 0.25);
             padding: 10px;
             border-radius: 12px;
-            margin-top: 2px;
         }
 
         .period-col {
@@ -708,19 +1248,12 @@
         .period-time {
             font-size: 0.68rem;
             color: var(--text-muted);
-            line-height: 1.1;
-        }
-
-        .period-icon {
-            font-size: 1.1rem;
-            margin: 2px 0;
         }
 
         .period-temp {
             font-size: 0.74rem;
             font-family: 'JetBrains Mono', monospace;
             color: var(--text-primary);
-            font-weight: 500;
         }
 
         .period-rain {
@@ -729,34 +1262,10 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Loading / Error States */
-        .loading-state, .error-state {
-            grid-column: 1 / -1;
-            padding: 80px 20px;
-            text-align: center;
-            background: var(--bg-card);
-            border: 1px solid var(--border-glass);
-            border-radius: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-        }
-
-        .spinner {
-            width: 44px;
-            height: 44px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top-color: var(--accent-purple);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
         /* Footer */
         .dashboard-footer {
             text-align: center;
-            padding: 30px 0 10px;
+            padding: 40px 0 10px;
             color: var(--text-muted);
             font-size: 0.8rem;
             display: flex;
@@ -767,39 +1276,38 @@
         .dashboard-footer a {
             color: var(--accent-indigo);
             text-decoration: none;
-            transition: color 0.2s;
         }
 
-        .dashboard-footer a:hover {
-            color: var(--accent-purple);
+        /* Responsive Breakpoints */
+        @media (max-width: 1080px) {
+            .taiwan-map-layout {
+                grid-template-columns: 1fr;
+            }
+            .imagery-thumbnails-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
-        /* Responsive */
-        @media (max-width: 960px) {
+        @media (max-width: 900px) {
             .hero-card {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 24px;
-                padding: 36px 28px;
+                gap: 20px;
+                padding: 30px 24px;
             }
-
             .hero-left {
                 flex-direction: column;
-                justify-content: center;
             }
-
             .hero-clock {
                 border-left: none;
                 border-top: 1px solid rgba(255, 255, 255, 0.08);
                 padding-left: 0;
-                padding-top: 24px;
+                padding-top: 20px;
                 text-align: center;
             }
-
             .clock-label {
                 justify-content: center;
             }
-
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -807,35 +1315,29 @@
 
         @media (max-width: 640px) {
             body {
-                padding: 20px 14px 60px;
+                padding: 16px 12px 60px;
             }
-
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-
-            .controls-card {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .search-box input {
+            .mode-tabs {
                 width: 100%;
+                justify-content: space-around;
             }
-
-            .search-box input:focus {
-                width: 100%;
+            .mode-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
             }
-
-            .search-refresh-group {
-                justify-content: space-between;
-            }
-
             .clock-time {
                 font-size: 2.2rem;
             }
-
-            .weather-grid {
+            .imagery-display-stage {
+                height: 380px;
+            }
+            .taiwan-svg-box {
+                height: 520px;
+            }
+            .imagery-thumbnails-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -850,7 +1352,7 @@
     <div class="grain"></div>
 
     <div class="container">
-        <!-- Hero Section: User Profile & Taipei Time Clock -->
+        <!-- Hero Section: User Profile & Taipei Standard Clock -->
         <header class="hero-card">
             <div class="hero-left">
                 <div class="avatar">E</div>
@@ -879,7 +1381,7 @@
         </header>
 
         <!-- Stats Overview Banner -->
-        <section class="stats-grid" id="stats-banner">
+        <section class="stats-grid">
             <div class="stat-card">
                 <div class="stat-icon avg">🌡️</div>
                 <div class="stat-info">
@@ -914,48 +1416,289 @@
             </div>
         </section>
 
-        <!-- Weather Control Bar -->
-        <section class="controls-card">
-            <div class="region-tabs" id="region-tabs">
-                <button class="region-btn active" data-region="all">全台 (22)</button>
-                <button class="region-btn" data-region="north">北部 (7)</button>
-                <button class="region-btn" data-region="central">中部 (6)</button>
-                <button class="region-btn" data-region="south">南部 (3)</button>
-                <button class="region-btn" data-region="east">東部 (3)</button>
-                <button class="region-btn" data-region="islands">離島 (3)</button>
+        <!-- Navigation View Mode Switcher -->
+        <nav class="view-mode-bar">
+            <div class="mode-tabs" id="view-mode-tabs">
+                <button class="mode-btn active" data-view="map-view">
+                    <span>🗺️</span> 台灣地圖觀測
+                </button>
+                <button class="mode-btn" data-view="imagery-view">
+                    <span>🛰️</span> 即時衛星/雷達圖資
+                </button>
+                <button class="mode-btn" data-view="list-view">
+                    <span>🗂️</span> 全台列表卡片
+                </button>
             </div>
 
-            <div class="search-refresh-group">
-                <div class="search-box">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="county-search" placeholder="搜尋縣市 (如: 臺北)..." autocomplete="off">
+            <div class="cwa-status-pill">
+                <span class="cwa-pill-badge">CWA 實時連線</span>
+                <span id="global-sync-time">資料同步中...</span>
+            </div>
+        </nav>
+
+        <!-- ========================================================
+             VIEW 1: 台灣地圖觀測模式 (TAIWAN MAP VIEW)
+        ======================================================== -->
+        <section class="view-section active" id="map-view">
+            <div class="taiwan-map-layout">
+                <!-- Left: Interactive SVG Taiwan Map -->
+                <div class="map-card-container">
+                    <div class="map-card-header">
+                        <h3><span>📍</span> 台灣全域動態氣象地圖</h3>
+                        <div class="map-legend">
+                            <div class="legend-item"><span class="legend-color" style="background:#60a5fa;"></span> &lt;24°C</div>
+                            <div class="legend-item"><span class="legend-color" style="background:#34d399;"></span> 24-27°C</div>
+                            <div class="legend-item"><span class="legend-color" style="background:#fbbf24;"></span> 28-30°C</div>
+                            <div class="legend-item"><span class="legend-color" style="background:#f87171;"></span> &gt;30°C</div>
+                        </div>
+                    </div>
+
+                    <div class="taiwan-svg-box">
+                        <svg class="taiwan-svg" viewBox="0 0 650 780" id="taiwan-svg-element">
+                            <!-- Background HUD Coordinate Grid -->
+                            <line x1="50" y1="200" x2="600" y2="200" class="taiwan-grid-line" />
+                            <line x1="50" y1="400" x2="600" y2="400" class="taiwan-grid-line" />
+                            <line x1="50" y1="600" x2="600" y2="600" class="taiwan-grid-line" />
+                            <line x1="200" y1="50" x2="200" y2="720" class="taiwan-grid-line" />
+                            <line x1="400" y1="50" x2="400" y2="720" class="taiwan-grid-line" />
+
+                            <!-- Matsu Box Inset -->
+                            <g>
+                                <rect x="30" y="30" width="130" height="90" class="island-inset-box" />
+                                <text x="42" y="48" class="inset-label">連江縣 (馬祖群島)</text>
+                                <circle cx="75" cy="75" r="5" fill="rgba(168,85,247,0.4)" />
+                                <circle cx="110" cy="85" r="4" fill="rgba(168,85,247,0.4)" />
+                            </g>
+
+                            <!-- Kinmen Box Inset -->
+                            <g>
+                                <rect x="30" y="140" width="130" height="90" class="island-inset-box" />
+                                <text x="42" y="158" class="inset-label">金門縣 (金門外島)</text>
+                                <path d="M 60 190 Q 75 178 95 185 Q 115 178 130 188 Q 115 202 85 198 Z" fill="rgba(168,85,247,0.4)" />
+                            </g>
+
+                            <!-- Penghu Box Inset -->
+                            <g>
+                                <rect x="30" y="320" width="130" height="130" class="island-inset-box" />
+                                <text x="42" y="338" class="inset-label">澎湖縣 (澎湖群島)</text>
+                                <circle cx="85" cy="380" r="10" fill="rgba(168,85,247,0.4)" />
+                                <circle cx="70" cy="405" r="6" fill="rgba(168,85,247,0.4)" />
+                                <circle cx="98" cy="415" r="5" fill="rgba(168,85,247,0.4)" />
+                            </g>
+
+                            <!-- Taiwan Main Island Stylized Contour Path -->
+                            <path class="taiwan-island-path" d="
+                                M 420 85
+                                C 445 95, 460 115, 445 135
+                                C 430 155, 420 175, 425 210
+                                C 430 240, 425 280, 415 330
+                                C 405 380, 395 430, 385 490
+                                C 375 540, 360 590, 345 640
+                                C 335 675, 315 675, 305 640
+                                C 295 605, 275 560, 260 520
+                                C 245 480, 230 435, 230 390
+                                C 230 350, 240 300, 255 250
+                                C 270 200, 290 160, 320 120
+                                C 350 85, 385 75, 420 85 Z
+                            " />
+
+                            <!-- Central Mountain Range visual glow spine -->
+                            <path d="M 390 150 Q 370 300 350 450 Q 330 550 320 620" 
+                                  stroke="rgba(255,255,255,0.08)" stroke-width="12" fill="none" stroke-linecap="round" />
+                            <path d="M 390 150 Q 370 300 350 450 Q 330 550 320 620" 
+                                  stroke="rgba(168,85,247,0.25)" stroke-width="4" fill="none" stroke-linecap="round" />
+
+                            <!-- Interactive County Markers Layer -->
+                            <g id="map-markers-layer"></g>
+                        </svg>
+                    </div>
                 </div>
-                <button class="refresh-btn" id="refresh-btn" title="重新整理氣象資料">
-                    🔄
-                </button>
+
+                <!-- Right: Selected County Weather Insight Panel -->
+                <aside class="map-side-panel">
+                    <div class="selected-county-header">
+                        <div>
+                            <div class="selected-badge-group">
+                                <span class="region-tag" id="panel-region-tag">北部地區</span>
+                                <span style="font-size: 0.76rem; color: var(--text-muted);">點擊地圖任意縣市以切換</span>
+                            </div>
+                            <h2 class="selected-county-name" id="panel-county-name">臺北市</h2>
+                        </div>
+                        <div class="selected-weather-icon" id="panel-weather-icon">⛅</div>
+                    </div>
+
+                    <div class="selected-temp-row">
+                        <div>
+                            <div class="selected-avg-temp" id="panel-avg-temp">--°C</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">當前預測均溫</div>
+                        </div>
+                        <div class="selected-temp-range">
+                            <span class="temp-high" id="panel-high-temp">▲ 最高 --°</span>
+                            <span class="temp-low" id="panel-low-temp">▼ 最低 --°</span>
+                            <div class="weather-desc-badge" style="margin-top: 6px;" id="panel-wx-badge">--</div>
+                        </div>
+                    </div>
+
+                    <div class="selected-metrics-grid">
+                        <div class="panel-metric-card">
+                            <span class="panel-metric-label">降雨機率 (PoP)</span>
+                            <span class="panel-metric-val" style="color: #38bdf8;" id="panel-pop-val">💧 -- %</span>
+                        </div>
+                        <div class="panel-metric-card">
+                            <span class="panel-metric-label">體感舒適度 (CI)</span>
+                            <span class="panel-metric-val" id="panel-ci-val">🍃 --</span>
+                        </div>
+                    </div>
+
+                    <!-- 36 Hours 3-Period Forecast for selected county -->
+                    <div class="forecast-title">
+                        <span>⏱️</span> 未來 36 小時三階段天氣走向
+                    </div>
+                    <div class="panel-periods-list" id="panel-periods-container">
+                        <!-- Filled by JS -->
+                    </div>
+
+                    <!-- Quick Switcher Chips -->
+                    <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px;">
+                        <div style="font-size: 0.76rem; color: var(--text-muted); margin-bottom: 8px;">快速切換重點都會區：</div>
+                        <div class="quick-county-chips">
+                            <button class="quick-chip" onclick="selectCountyByName('臺北市')">臺北市</button>
+                            <button class="quick-chip" onclick="selectCountyByName('新北市')">新北市</button>
+                            <button class="quick-chip" onclick="selectCountyByName('桃園市')">桃園市</button>
+                            <button class="quick-chip" onclick="selectCountyByName('臺中市')">臺中市</button>
+                            <button class="quick-chip" onclick="selectCountyByName('臺南市')">臺南市</button>
+                            <button class="quick-chip" onclick="selectCountyByName('高雄市')">高雄市</button>
+                            <button class="quick-chip" onclick="selectCountyByName('花蓮縣')">花蓮縣</button>
+                            <button class="quick-chip" onclick="selectCountyByName('宜蘭縣')">宜蘭縣</button>
+                        </div>
+                    </div>
+                </aside>
             </div>
         </section>
 
-        <!-- Weather Section Header -->
-        <div class="section-header">
-            <div class="section-title">
-                <h2>全台 22 縣市詳細氣象預報</h2>
-                <span class="cwa-tag">交通部中央氣象署 CWA 即時連線</span>
-            </div>
-            <div class="sync-info" id="last-update">資料同步中...</div>
-        </div>
+        <!-- ========================================================
+             VIEW 2: 即時氣象衛星與雷達圖資中心 (IMAGERY HUB)
+        ======================================================== -->
+        <section class="view-section" id="imagery-view">
+            <div class="imagery-hub-card">
+                <div class="imagery-header">
+                    <div class="imagery-title-group">
+                        <h2><span>🛰️</span> 中央氣象署 (CWA) 即時高解析度氣象影像</h2>
+                        <p>同步交通部中央氣象署最新對流回波、紅外線真實色彩雲圖與全台地表溫度分佈</p>
+                    </div>
 
-        <!-- Weather Cards Grid -->
-        <main class="weather-grid" id="weather-grid">
-            <div class="loading-state">
-                <div class="spinner"></div>
-                <p>正在與中央氣象署 Open Data API 同步最新預報資訊...</p>
-            </div>
-        </main>
+                    <div class="imagery-tabs" id="imagery-tabs">
+                        <button class="img-tab-btn active" data-img="radar-tw">
+                            <span>📡</span> 臺灣雷達回波
+                        </button>
+                        <button class="img-tab-btn" data-img="satellite-ir">
+                            <span>🛰️</span> 彩色紅外線雲圖
+                        </button>
+                        <button class="img-tab-btn" data-img="temp-map">
+                            <span>🌡️</span> 全台即時氣溫圖
+                        </button>
+                        <button class="img-tab-btn" data-img="radar-wide">
+                            <span>🌀</span> 廣域雷達合成
+                        </button>
+                    </div>
+                </div>
 
-        <!-- Footer -->
+                <!-- Main Active Image Viewer Stage -->
+                <div class="imagery-display-stage" id="imagery-stage">
+                    <img src="https://www.cwa.gov.tw/Data/radar/CV1_TW_3600.png" 
+                         alt="CWA 即時氣象圖像" 
+                         class="live-image" 
+                         id="main-live-image">
+                    
+                    <div class="image-overlay-info">
+                        <div>
+                            <span class="img-badge">● 即時觀測更新</span>
+                            <span id="active-image-caption" style="margin-left: 10px; color: #ffffff; font-weight: 500;">臺灣全區雷達回波合成圖（降雨與對流粒子觀測）</span>
+                        </div>
+                        <button class="image-refresh-btn" onclick="refreshActiveImage()">
+                            🔄 重新載入最新影像
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Thumbnails Quick Select Gallery -->
+                <div class="imagery-thumbnails-grid">
+                    <div class="thumb-card active" onclick="switchLiveImage('radar-tw')">
+                        <div class="thumb-img-wrapper">
+                            <img src="https://www.cwa.gov.tw/Data/radar/CV1_TW_3600.png" alt="臺灣雷達回波">
+                        </div>
+                        <div class="thumb-info">
+                            <div class="thumb-title">臺灣雷達回波 (TW)</div>
+                            <div class="thumb-sub">高解析度即時降水粒子回波</div>
+                        </div>
+                    </div>
+
+                    <div class="thumb-card" onclick="switchLiveImage('satellite-ir')">
+                        <div class="thumb-img-wrapper">
+                            <img src="https://www.cwa.gov.tw/Data/satellite/LCC_IR1_CR_2750/LCC_IR1_CR_2750.jpg" alt="彩色紅外線雲圖">
+                        </div>
+                        <div class="thumb-info">
+                            <div class="thumb-title">彩色紅外線衛星雲圖</div>
+                            <div class="thumb-sub">高空雲系、雲頂溫度及對流鋒面</div>
+                        </div>
+                    </div>
+
+                    <div class="thumb-card" onclick="switchLiveImage('temp-map')">
+                        <div class="thumb-img-wrapper">
+                            <img src="https://www.cwa.gov.tw/Data/temperature/temp.jpg" alt="全台即時氣溫圖">
+                        </div>
+                        <div class="thumb-info">
+                            <div class="thumb-title">全台即時氣溫分佈圖</div>
+                            <div class="thumb-sub">各自動氣象站實測等溫線分佈</div>
+                        </div>
+                    </div>
+
+                    <div class="thumb-card" onclick="switchLiveImage('radar-wide')">
+                        <div class="thumb-img-wrapper">
+                            <img src="https://www.cwa.gov.tw/Data/radar/CV1_3600.png" alt="廣域雷達合成">
+                        </div>
+                        <div class="thumb-info">
+                            <div class="thumb-title">廣域雷達整合圖</div>
+                            <div class="thumb-sub">包含臺灣海峽及周邊海域水氣</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================
+             VIEW 3: 22 縣市卡片清單模式 (CARDS LIST VIEW)
+        ======================================================== -->
+        <section class="view-section" id="list-view">
+            <!-- Filter & Search Controls -->
+            <div class="controls-card">
+                <div class="region-tabs" id="region-tabs">
+                    <button class="region-btn active" data-region="all">全台 (22)</button>
+                    <button class="region-btn" data-region="north">北部 (7)</button>
+                    <button class="region-btn" data-region="central">中部 (6)</button>
+                    <button class="region-btn" data-region="south">南部 (3)</button>
+                    <button class="region-btn" data-region="east">東部 (3)</button>
+                    <button class="region-btn" data-region="islands">離島 (3)</button>
+                </div>
+
+                <div class="search-refresh-group">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="county-search" placeholder="搜尋縣市 (如: 臺北)..." autocomplete="off">
+                    </div>
+                    <button class="refresh-btn" id="refresh-btn" title="重新整理氣象資料" onclick="fetchWeather()">
+                        🔄
+                    </button>
+                </div>
+            </div>
+
+            <!-- Weather Cards Grid -->
+            <main class="weather-grid" id="weather-grid"></main>
+        </section>
+
+        <!-- Dashboard Footer -->
         <footer class="dashboard-footer">
-            <p>Designed for EasyBoy5566 · 採用中央氣象署 Open Data API (F-C0032-001)</p>
+            <p>Designed for EasyBoy5566 · 採用交通部中央氣象署 Open Data API (F-C0032-001) 及官方雷達/衛星圖資</p>
             <p>© 2026 EasyBoy5566 · GitHub: <a href="https://github.com/EasyBoy5566/L2web" target="_blank">EasyBoy5566/L2web</a></p>
         </footer>
     </div>
@@ -964,6 +1707,32 @@
         // CWA API Key
         const CWA_API_KEY = 'CWA-97D41E49-30C7-432B-A2A6-D5CB2A22AC36';
         const CWA_API_URL = `https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=${CWA_API_KEY}&format=JSON`;
+
+        // Geographic coordinates mapping on our 650x780 SVG map for all 22 counties
+        const COUNTY_GEO_COORDS = {
+            '基隆市': { x: 440, y: 72 },
+            '臺北市': { x: 395, y: 92 },
+            '新北市': { x: 350, y: 110 },
+            '桃園市': { x: 310, y: 125 },
+            '新竹市': { x: 275, y: 152 },
+            '新竹縣': { x: 325, y: 165 },
+            '苗栗縣': { x: 285, y: 200 },
+            '臺中市': { x: 275, y: 245 },
+            '彰化縣': { x: 240, y: 285 },
+            '南投縣': { x: 325, y: 320 },
+            '雲林縣': { x: 235, y: 345 },
+            '嘉義市': { x: 250, y: 390 },
+            '嘉義縣': { x: 295, y: 385 },
+            '臺南市': { x: 245, y: 445 },
+            '高雄市': { x: 270, y: 505 },
+            '屏東縣': { x: 300, y: 580 },
+            '宜蘭縣': { x: 425, y: 175 },
+            '花蓮縣': { x: 410, y: 310 },
+            '臺東縣': { x: 375, y: 495 },
+            '澎湖縣': { x: 95, y: 385 },
+            '金門縣': { x: 95, y: 185 },
+            '連江縣': { x: 95, y: 80 }
+        };
 
         // Regions definition
         const REGIONS = {
@@ -989,7 +1758,7 @@
             return '臺灣地區';
         }
 
-        // Weather condition to icon
+        // Weather icon resolver
         function getWeatherIcon(wxName) {
             if (!wxName) return '🌤️';
             if (wxName.includes('雷')) return '⛈️';
@@ -1004,24 +1773,11 @@
             return '🌤️';
         }
 
-        // Format Period Time
-        function formatPeriodLabel(startTimeStr, endTimeStr) {
-            try {
-                const s = new Date(startTimeStr.replace(/-/g, '/'));
-                const e = new Date(endTimeStr.replace(/-/g, '/'));
-                const sh = s.getHours();
-                const eh = e.getHours();
-                const dayStr = (s.getDate() === new Date().getDate()) ? '今天' : '明天';
-                
-                let timeDesc = '';
-                if (sh >= 6 && sh < 12) timeDesc = '早晨至下午';
-                else if (sh >= 12 && sh < 18) timeDesc = '下午至晚上';
-                else timeDesc = '夜間至清晨';
-
-                return `${dayStr} ${sh}:00`;
-            } catch (err) {
-                return '預報時段';
-            }
+        function getTempColor(temp) {
+            if (temp < 24) return '#60a5fa'; // Cool blue
+            if (temp <= 27) return '#34d399'; // Mild emerald
+            if (temp <= 30) return '#fbbf24'; // Warm amber
+            return '#f87171'; // Hot red
         }
 
         // Clock Update
@@ -1057,12 +1813,23 @@
         setInterval(updateClock, 100);
         updateClock();
 
-        // Weather Data Store
+        // Data Store
         let parsedWeatherData = [];
+        let selectedCounty = '臺北市';
         let currentFilter = 'all';
         let searchQuery = '';
 
-        // Parse CWA Location Record
+        function formatPeriodLabel(startTimeStr, endTimeStr) {
+            try {
+                const s = new Date(startTimeStr.replace(/-/g, '/'));
+                const sh = s.getHours();
+                const dayStr = (s.getDate() === new Date().getDate()) ? '今天' : '明天';
+                return `${dayStr} ${sh}:00`;
+            } catch (err) {
+                return '預報時段';
+            }
+        }
+
         function parseLocation(loc) {
             const name = loc.locationName;
             const elements = {};
@@ -1070,7 +1837,6 @@
                 elements[el.elementName] = el.time;
             });
 
-            // 3 time intervals
             const periods = [];
             const wxList = elements['Wx'] || [];
             const popList = elements['PoP'] || [];
@@ -1092,13 +1858,8 @@
             }
 
             const current = periods[0] || {
-                wx: '晴時多雲',
-                pop: '0',
-                minT: 24,
-                maxT: 30,
-                ci: '舒適'
+                wx: '晴時多雲', pop: '0', minT: 24, maxT: 30, ci: '舒適'
             };
-
             const avgT = Math.round((current.minT + current.maxT) / 2);
 
             return {
@@ -1110,23 +1871,19 @@
             };
         }
 
-        // Fetch Weather Data
+        // Fetch Weather API
         async function fetchWeather() {
             const refreshBtn = document.getElementById('refresh-btn');
-            refreshBtn.classList.add('spinning');
-            const grid = document.getElementById('weather-grid');
+            if (refreshBtn) refreshBtn.classList.add('spinning');
 
             try {
-                const response = await fetch(CWA_API_URL);
-                if (!response.ok) {
-                    throw new Error(`HTTP 錯誤: ${response.status}`);
-                }
-                const data = await response.json();
+                const res = await fetch(CWA_API_URL);
+                if (!res.ok) throw new Error(`HTTP 錯誤: ${res.status}`);
+                const data = await res.json();
                 const locations = data.records?.location || [];
 
                 parsedWeatherData = locations.map(parseLocation);
 
-                // Sort with standard north-to-south / regional order
                 const priority = [
                     '基隆市', '臺北市', '新北市', '桃園市', '新竹市', '新竹縣', '苗栗縣',
                     '臺中市', '彰化縣', '南投縣', '雲林縣', '嘉義市', '嘉義縣',
@@ -1141,28 +1898,24 @@
                 });
 
                 updateStats(parsedWeatherData);
+                renderSvgMapMarkers();
+                updateMapSidePanel(selectedCounty);
                 renderWeatherGrid();
 
                 const now = new Date();
-                document.getElementById('last-update').textContent = `最新同步: ${now.toLocaleTimeString('zh-TW', { hour12: false })}`;
+                const timeStr = now.toLocaleTimeString('zh-TW', { hour12: false });
+                document.getElementById('global-sync-time').textContent = `最新同步: ${timeStr}`;
             } catch (err) {
-                console.error('天氣資料取得失敗:', err);
-                grid.innerHTML = `
-                    <div class="error-state">
-                        <div style="font-size: 3rem;">⚠️</div>
-                        <h3>中央氣象署 API 資料連線異常</h3>
-                        <p style="color: var(--text-secondary); max-width: 460px;">${err.message || '請確認網路連線或 API 金鑰額度'}</p>
-                        <button class="region-btn active" onclick="fetchWeather()">點擊重新連線</button>
-                    </div>
-                `;
+                console.error('API 連線失敗:', err);
+                document.getElementById('global-sync-time').textContent = '⚠️ 資料同步異常';
             } finally {
-                setTimeout(() => {
-                    refreshBtn.classList.remove('spinning');
-                }, 500);
+                if (refreshBtn) {
+                    setTimeout(() => refreshBtn.classList.remove('spinning'), 500);
+                }
             }
         }
 
-        // Update Overview Statistics
+        // Update Top 4 Stats
         function updateStats(data) {
             if (!data.length) return;
 
@@ -1192,7 +1945,6 @@
             });
 
             const avgTemp = (totalTemp / data.length).toFixed(1);
-
             document.getElementById('stat-avg-temp').textContent = `${avgTemp} °C`;
             document.getElementById('stat-max-temp').textContent = `${highestTemp} °C`;
             document.getElementById('stat-max-loc').textContent = highestLoc;
@@ -1202,18 +1954,191 @@
             document.getElementById('stat-rain-loc').textContent = maxRainLoc;
         }
 
-        // Filter and Render Cards
+        // Render Interactive County Markers on SVG Taiwan Map
+        function renderSvgMapMarkers() {
+            const container = document.getElementById('map-markers-layer');
+            if (!container) return;
+
+            let html = '';
+            parsedWeatherData.forEach(item => {
+                const coord = COUNTY_GEO_COORDS[item.name];
+                if (!coord) return;
+
+                const shortName = item.name.replace('市', '').replace('縣', '');
+                const cur = item.current;
+                const tempColor = getTempColor(item.avgT);
+                const isActive = (item.name === selectedCounty);
+
+                html += `
+                    <g class="county-node ${isActive ? 'active' : ''}" 
+                       id="marker-${item.name}"
+                       onclick="selectCountyByName('${item.name}')">
+                        <!-- Pulse Halo -->
+                        <circle cx="${coord.x}" cy="${coord.y}" r="8" fill="${tempColor}" class="node-pin-pulse" />
+                        
+                        <!-- Center Anchor Pin -->
+                        <circle cx="${coord.x}" cy="${coord.y}" r="5.5" fill="${tempColor}" stroke="#ffffff" stroke-width="1.8" class="node-pin-circle" />
+                        
+                        <!-- Floating Glass Weather Chip -->
+                        <g transform="translate(${coord.x + 10}, ${coord.y - 14})">
+                            <rect x="0" y="0" width="70" height="26" class="node-chip-bg" />
+                            <text x="24" y="17" class="node-text-name">${shortName}</text>
+                            <text x="54" y="17" class="node-text-temp" fill="${tempColor}">${item.avgT}°</text>
+                        </g>
+                    </g>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Select County and update Side Panel
+        function selectCountyByName(countyName) {
+            selectedCounty = countyName;
+
+            // Highlight in SVG
+            document.querySelectorAll('.county-node').forEach(node => {
+                node.classList.remove('active');
+            });
+            const activeNode = document.getElementById(`marker-${countyName}`);
+            if (activeNode) activeNode.classList.add('active');
+
+            // Update Quick Chips
+            document.querySelectorAll('.quick-chip').forEach(chip => {
+                if (chip.textContent === countyName) {
+                    chip.classList.add('active');
+                } else {
+                    chip.classList.remove('active');
+                }
+            });
+
+            updateMapSidePanel(countyName);
+        }
+
+        function updateMapSidePanel(countyName) {
+            const data = parsedWeatherData.find(item => item.name === countyName);
+            if (!data) return;
+
+            const cur = data.current;
+            const icon = getWeatherIcon(cur.wx);
+
+            document.getElementById('panel-county-name').textContent = data.name;
+            document.getElementById('panel-region-tag').textContent = data.region;
+            document.getElementById('panel-weather-icon').textContent = icon;
+            document.getElementById('panel-avg-temp').textContent = `${data.avgT}°C`;
+            document.getElementById('panel-high-temp').textContent = `▲ 最高 ${cur.maxT}°C`;
+            document.getElementById('panel-low-temp').textContent = `▼ 最低 ${cur.minT}°C`;
+            document.getElementById('panel-wx-badge').textContent = `${icon} ${cur.wx}`;
+            document.getElementById('panel-pop-val').textContent = `💧 ${cur.pop} %`;
+            document.getElementById('panel-ci-val').textContent = `🍃 ${cur.ci || '舒適'}`;
+
+            // Render periods in side panel
+            const periodsContainer = document.getElementById('panel-periods-container');
+            periodsContainer.innerHTML = data.periods.map(p => `
+                <div class="panel-period-item">
+                    <span class="period-item-time">${formatPeriodLabel(p.startTime, p.endTime)}</span>
+                    <div class="period-item-wx">
+                        <span>${getWeatherIcon(p.wx)}</span>
+                        <span>${p.wx}</span>
+                    </div>
+                    <span class="period-item-temp">${p.minT}° ~ ${p.maxT}°C</span>
+                    <span style="color: #38bdf8; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">💧${p.pop}%</span>
+                </div>
+            `).join('');
+        }
+
+        // ========================================================
+        // LIVE IMAGERY CONTROLS
+        // ========================================================
+        const IMAGERY_SOURCES = {
+            'radar-tw': {
+                url: 'https://www.cwa.gov.tw/Data/radar/CV1_TW_3600.png',
+                caption: '臺灣全區雷達回波合成圖（觀測降雨水氣強度與對流胞路徑）'
+            },
+            'satellite-ir': {
+                url: 'https://www.cwa.gov.tw/Data/satellite/LCC_IR1_CR_2750/LCC_IR1_CR_2750.jpg',
+                caption: '彩色紅外線衛星雲圖（觀測高低空雲系、雲頂溫度及鋒面位置）'
+            },
+            'temp-map': {
+                url: 'https://www.cwa.gov.tw/Data/temperature/temp.jpg',
+                caption: '全台自動氣象站即時氣溫等溫線分佈圖'
+            },
+            'radar-wide': {
+                url: 'https://www.cwa.gov.tw/Data/radar/CV1_3600.png',
+                caption: '大範圍雷達回波圖（包含臺灣海峽及鄰近海域降水回波）'
+            }
+        };
+
+        let currentActiveImageKey = 'radar-tw';
+
+        function switchLiveImage(key) {
+            currentActiveImageKey = key;
+            const imgData = IMAGERY_SOURCES[key];
+            if (!imgData) return;
+
+            const mainImg = document.getElementById('main-live-image');
+            const caption = document.getElementById('active-image-caption');
+
+            mainImg.style.opacity = '0.3';
+            // Cache buster
+            mainImg.src = `${imgData.url}?t=${Date.now()}`;
+            mainImg.onload = () => {
+                mainImg.style.opacity = '1';
+            };
+            caption.textContent = imgData.caption;
+
+            // Update Tabs
+            document.querySelectorAll('.img-tab-btn').forEach(btn => {
+                if (btn.dataset.img === key) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+
+            // Update Thumbnails
+            document.querySelectorAll('.thumb-card').forEach(card => {
+                if (card.getAttribute('onclick')?.includes(key)) card.classList.add('active');
+                else card.classList.remove('active');
+            });
+        }
+
+        function refreshActiveImage() {
+            switchLiveImage(currentActiveImageKey);
+        }
+
+        document.getElementById('imagery-tabs')?.addEventListener('click', (e) => {
+            const btn = e.target.closest('.img-tab-btn');
+            if (btn && btn.dataset.img) {
+                switchLiveImage(btn.dataset.img);
+            }
+        });
+
+        // ========================================================
+        // VIEW MODE SWITCHING
+        // ========================================================
+        document.getElementById('view-mode-tabs')?.addEventListener('click', (e) => {
+            const btn = e.target.closest('.mode-btn');
+            if (!btn || !btn.dataset.view) return;
+
+            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const targetViewId = btn.dataset.view;
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+            const activeSection = document.getElementById(targetViewId);
+            if (activeSection) activeSection.classList.add('active');
+        });
+
+        // ========================================================
+        // CARDS LIST VIEW
+        // ========================================================
         function renderWeatherGrid() {
             const grid = document.getElementById('weather-grid');
-            let filtered = parsedWeatherData;
+            if (!grid) return;
 
-            // Region filter
+            let filtered = parsedWeatherData;
             if (currentFilter !== 'all') {
                 const targetCounties = REGIONS[currentFilter] || [];
                 filtered = filtered.filter(item => targetCounties.includes(item.name));
             }
-
-            // Search query filter
             if (searchQuery.trim()) {
                 const q = searchQuery.trim();
                 filtered = filtered.filter(item => item.name.includes(q) || item.region.includes(q));
@@ -1221,9 +2146,8 @@
 
             if (!filtered.length) {
                 grid.innerHTML = `
-                    <div class="loading-state" style="padding: 60px 20px;">
-                        <div style="font-size: 2.5rem;">🔍</div>
-                        <p style="color: var(--text-secondary);">查無符合「${searchQuery}」條件的縣市資料</p>
+                    <div style="grid-column: 1/-1; padding: 60px; text-align: center; color: var(--text-muted);">
+                        查無符合關鍵字「${searchQuery}」的縣市資料
                     </div>
                 `;
                 return;
@@ -1232,12 +2156,10 @@
             grid.innerHTML = filtered.map(item => {
                 const cur = item.current;
                 const icon = getWeatherIcon(cur.wx);
-
-                // 3 Periods HTML
                 const periodsHtml = item.periods.map(p => `
                     <div class="period-col">
                         <div class="period-time">${formatPeriodLabel(p.startTime, p.endTime)}</div>
-                        <div class="period-icon">${getWeatherIcon(p.wx)}</div>
+                        <div style="font-size: 1.1rem; margin: 2px 0;">${getWeatherIcon(p.wx)}</div>
                         <div class="period-temp">${p.minT}°~${p.maxT}°</div>
                         <div class="period-rain">💧${p.pop}%</div>
                     </div>
@@ -1250,7 +2172,7 @@
                                 <div class="location-name">${item.name}</div>
                                 <div class="location-region">${item.region}</div>
                             </div>
-                            <div class="weather-status-icon" title="${cur.wx}">${icon}</div>
+                            <div class="weather-status-icon">${icon}</div>
                         </div>
 
                         <div class="temp-row">
@@ -1288,32 +2210,27 @@
             }).join('');
         }
 
-        // Region Tab Clicking
-        document.getElementById('region-tabs').addEventListener('click', (e) => {
+        document.getElementById('region-tabs')?.addEventListener('click', (e) => {
             const btn = e.target.closest('.region-btn');
             if (!btn) return;
-
             document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
             currentFilter = btn.dataset.region;
             renderWeatherGrid();
         });
 
-        // Search Input
-        document.getElementById('county-search').addEventListener('input', (e) => {
+        document.getElementById('county-search')?.addEventListener('input', (e) => {
             searchQuery = e.target.value;
             renderWeatherGrid();
         });
 
-        // Refresh Button
-        document.getElementById('refresh-btn').addEventListener('click', fetchWeather);
-
-        // Initial Load
+        // Initialize Data
         fetchWeather();
 
-        // Auto Refresh every 10 minutes
+        // Auto Refresh weather data every 10 minutes
         setInterval(fetchWeather, 10 * 60 * 1000);
+        // Auto Refresh live radar/satellite images every 5 minutes
+        setInterval(refreshActiveImage, 5 * 60 * 1000);
     </script>
 </body>
 </html>
