@@ -417,6 +417,40 @@
             font-weight: 600;
         }
 
+        .cwa-pill-badge.warning {
+            background: rgba(245, 158, 11, 0.12);
+            color: #fbbf24;
+            border-color: rgba(245, 158, 11, 0.35);
+        }
+
+        .data-error-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 14px 18px;
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: 14px;
+            background: rgba(245, 158, 11, 0.1);
+            color: #fde68a;
+            font-size: 0.86rem;
+        }
+
+        .data-error-banner[hidden] {
+            display: none;
+        }
+
+        .retry-btn {
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 9px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+        }
+
         /* View Content Sections */
         .view-section {
             display: none;
@@ -454,6 +488,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
             padding-bottom: 12px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
@@ -494,10 +530,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.06) 0%, transparent 70%);
+            background:
+                linear-gradient(160deg, rgba(6, 182, 212, 0.04), rgba(99, 102, 241, 0.05)),
+                rgba(2, 6, 23, 0.38);
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(148, 163, 184, 0.1);
             user-select: none;
+            overflow: hidden;
         }
 
         .taiwan-svg {
@@ -506,96 +545,99 @@
             filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.15));
         }
 
-        .taiwan-island-path {
-            fill: rgba(30, 32, 60, 0.7);
-            stroke: rgba(168, 85, 247, 0.5);
-            stroke-width: 2.2;
-            stroke-dasharray: 1200;
-            stroke-dashoffset: 0;
-            filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.25));
-            transition: all 0.3s ease;
-        }
-
-        .taiwan-grid-line {
-            stroke: rgba(255, 255, 255, 0.04);
+        .map-grid path {
+            fill: none;
+            stroke: rgba(148, 163, 184, 0.06);
             stroke-width: 1;
-            stroke-dasharray: 4 6;
+            stroke-dasharray: 4 9;
         }
 
-        .island-inset-box {
-            fill: rgba(255, 255, 255, 0.02);
-            stroke: rgba(255, 255, 255, 0.08);
+        .island-insets rect {
+            fill: rgba(15, 23, 42, 0.55);
+            stroke: rgba(148, 163, 184, 0.14);
             stroke-width: 1;
-            rx: 12;
         }
 
-        .inset-label {
-            font-size: 11px;
-            fill: rgba(255, 255, 255, 0.4);
-            font-family: inherit;
-        }
-
-        /* County Map Node / Marker */
-        .county-node {
-            cursor: pointer;
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .county-node:hover {
-            transform: scale(1.18);
-        }
-
-        .county-node.active .node-pin-circle {
-            fill: #ec4899;
-            stroke: #ffffff;
-            stroke-width: 2.5;
-            filter: drop-shadow(0 0 12px #ec4899);
-        }
-
-        .county-node.active .node-chip-bg {
-            stroke: var(--accent-pink);
-            stroke-width: 1.8;
-            fill: rgba(236, 72, 153, 0.25);
-        }
-
-        .node-pin-pulse {
-            animation: nodePulse 2.4s infinite ease-out;
-            transform-origin: center;
-        }
-
-        @keyframes nodePulse {
-            0% { r: 4; opacity: 0.9; }
-            100% { r: 16; opacity: 0; }
-        }
-
-        .node-chip-bg {
-            fill: rgba(16, 18, 38, 0.85);
-            stroke: rgba(255, 255, 255, 0.15);
-            stroke-width: 1;
-            rx: 7;
-            transition: all 0.25s ease;
-            backdrop-filter: blur(8px);
-        }
-
-        .county-node:hover .node-chip-bg {
-            stroke: var(--accent-purple);
-            fill: rgba(168, 85, 247, 0.25);
-        }
-
-        .node-text-name {
-            font-size: 11.5px;
+        .island-insets text {
+            fill: rgba(226, 232, 240, 0.62);
+            font-size: 12px;
             font-weight: 600;
-            fill: #ffffff;
-            font-family: 'Noto Sans TC', sans-serif;
-            text-anchor: middle;
-            pointer-events: none;
+            letter-spacing: 1px;
         }
 
-        .node-text-temp {
-            font-size: 10.5px;
-            font-weight: 700;
+        .county-area {
+            cursor: pointer;
+            stroke: rgba(226, 232, 240, 0.5);
+            stroke-width: 1.35;
+            stroke-linejoin: round;
+            vector-effect: non-scaling-stroke;
+            fill-rule: evenodd;
+            clip-rule: evenodd;
+            transition: fill 0.25s ease, opacity 0.25s ease, stroke 0.25s ease, filter 0.25s ease;
+        }
+
+        .county-area:hover,
+        .county-area:focus {
+            stroke: #ffffff;
+            stroke-width: 2.4;
+            opacity: 1;
+            filter: brightness(1.22);
+            outline: none;
+        }
+
+        .county-area.active {
+            stroke: #ffffff;
+            stroke-width: 3;
+            opacity: 1;
+            filter: url(#county-active-glow) brightness(1.15);
+        }
+
+        .map-hover-tooltip {
+            position: absolute;
+            z-index: 4;
+            min-width: 112px;
+            padding: 9px 12px;
+            border-radius: 11px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(8, 15, 32, 0.92);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.38);
+            backdrop-filter: blur(16px);
+            color: #fff;
+            font-size: 0.8rem;
+            line-height: 1.45;
+            pointer-events: none;
+            transform: translate(12px, 12px);
+        }
+
+        .map-hover-tooltip[hidden] {
+            display: none;
+        }
+
+        .map-hover-tooltip strong {
+            display: block;
+            font-size: 0.9rem;
+        }
+
+        .map-hover-tooltip span {
+            color: #67e8f9;
             font-family: 'JetBrains Mono', monospace;
-            text-anchor: middle;
+            font-weight: 700;
+        }
+
+        .map-hint {
+            position: absolute;
+            left: 18px;
+            right: 18px;
+            bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 8px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            background: rgba(2, 6, 23, 0.72);
+            color: var(--text-muted);
+            font-size: 0.72rem;
             pointer-events: none;
         }
 
@@ -879,6 +921,25 @@
             filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.8));
         }
 
+        .image-load-status {
+            position: absolute;
+            inset: 50% auto auto 50%;
+            transform: translate(-50%, -50%);
+            max-width: min(420px, 80%);
+            padding: 12px 16px;
+            border-radius: 12px;
+            background: rgba(8, 9, 20, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-secondary);
+            text-align: center;
+            font-size: 0.86rem;
+            pointer-events: none;
+        }
+
+        .image-load-status[hidden] {
+            display: none;
+        }
+
         .image-overlay-info {
             position: absolute;
             bottom: 18px;
@@ -936,6 +997,10 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
+            width: 100%;
+            color: inherit;
+            font: inherit;
+            text-align: left;
         }
 
         .thumb-card:hover, .thumb-card.active {
@@ -959,12 +1024,14 @@
         }
 
         .thumb-info .thumb-title {
+            display: block;
             font-size: 0.85rem;
             font-weight: 600;
             color: var(--text-primary);
         }
 
         .thumb-info .thumb-sub {
+            display: block;
             font-size: 0.72rem;
             color: var(--text-muted);
             margin-top: 2px;
@@ -1278,6 +1345,22 @@
             text-decoration: none;
         }
 
+        button:focus-visible,
+        input:focus-visible,
+        [role="button"]:focus-visible {
+            outline: 3px solid rgba(103, 232, 249, 0.85);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         /* Responsive Breakpoints */
         @media (max-width: 1080px) {
             .taiwan-map-layout {
@@ -1335,7 +1418,30 @@
                 height: 380px;
             }
             .taiwan-svg-box {
-                height: 520px;
+                height: 500px;
+            }
+            .map-card-container {
+                padding: 16px;
+            }
+            .map-legend {
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            .map-hint {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                justify-content: center;
+            }
+            .map-hint span:last-child {
+                display: none;
+            }
+            .selected-temp-row {
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .selected-avg-temp {
+                font-size: 2.5rem;
             }
             .imagery-thumbnails-grid {
                 grid-template-columns: 1fr;
@@ -1370,7 +1476,7 @@
             <div class="hero-clock">
                 <div class="clock-label">
                     <span class="clock-dot"></span>
-                    台北標準時間 · UTC+8
+                    臺灣時間 · UTC+8
                 </div>
                 <div class="clock-time" id="clock-time">--:--:--</div>
                 <div class="clock-date" id="clock-date">載入中...</div>
@@ -1385,7 +1491,7 @@
             <div class="stat-card">
                 <div class="stat-icon avg">🌡️</div>
                 <div class="stat-info">
-                    <div class="stat-title">全台平均氣溫</div>
+                    <div class="stat-title">首時段全臺預報均溫</div>
                     <div class="stat-value" id="stat-avg-temp">-- °C</div>
                     <div class="stat-sub">涵蓋 22 縣市</div>
                 </div>
@@ -1393,7 +1499,7 @@
             <div class="stat-card">
                 <div class="stat-icon max">🔥</div>
                 <div class="stat-info">
-                    <div class="stat-title">今日最高溫</div>
+                    <div class="stat-title">首時段最高預報</div>
                     <div class="stat-value" id="stat-max-temp">-- °C</div>
                     <div class="stat-sub" id="stat-max-loc">統計中...</div>
                 </div>
@@ -1401,7 +1507,7 @@
             <div class="stat-card">
                 <div class="stat-icon min">❄️</div>
                 <div class="stat-info">
-                    <div class="stat-title">今日最低溫</div>
+                    <div class="stat-title">首時段最低預報</div>
                     <div class="stat-value" id="stat-min-temp">-- °C</div>
                     <div class="stat-sub" id="stat-min-loc">統計中...</div>
                 </div>
@@ -1409,7 +1515,7 @@
             <div class="stat-card">
                 <div class="stat-icon rain">💧</div>
                 <div class="stat-info">
-                    <div class="stat-title">最高降雨機率</div>
+                    <div class="stat-title">首時段最高降雨機率</div>
                     <div class="stat-value" id="stat-max-rain">-- %</div>
                     <div class="stat-sub" id="stat-rain-loc">統計中...</div>
                 </div>
@@ -1417,29 +1523,34 @@
         </section>
 
         <!-- Navigation View Mode Switcher -->
-        <nav class="view-mode-bar">
-            <div class="mode-tabs" id="view-mode-tabs">
-                <button class="mode-btn active" data-view="map-view">
+        <nav class="view-mode-bar" aria-label="氣象資料檢視模式">
+            <div class="mode-tabs" id="view-mode-tabs" role="tablist">
+                <button type="button" class="mode-btn active" data-view="map-view" role="tab" aria-selected="true" aria-controls="map-view">
                     <span>🗺️</span> 台灣地圖觀測
                 </button>
-                <button class="mode-btn" data-view="imagery-view">
+                <button type="button" class="mode-btn" data-view="imagery-view" role="tab" aria-selected="false" aria-controls="imagery-view">
                     <span>🛰️</span> 即時衛星/雷達圖資
                 </button>
-                <button class="mode-btn" data-view="list-view">
+                <button type="button" class="mode-btn" data-view="list-view" role="tab" aria-selected="false" aria-controls="list-view">
                     <span>🗂️</span> 全台列表卡片
                 </button>
             </div>
 
             <div class="cwa-status-pill">
-                <span class="cwa-pill-badge">CWA 實時連線</span>
-                <span id="global-sync-time">資料同步中...</span>
+                <span class="cwa-pill-badge" id="connection-badge">CWA 即時同步</span>
+                <span id="global-sync-time" aria-live="polite">資料同步中...</span>
             </div>
         </nav>
+
+        <div class="data-error-banner" id="data-error-banner" role="alert" hidden>
+            <span id="data-error-message">目前無法取得最新預報資料。</span>
+            <button type="button" class="retry-btn" onclick="fetchWeather()">重新嘗試</button>
+        </div>
 
         <!-- ========================================================
              VIEW 1: 台灣地圖觀測模式 (TAIWAN MAP VIEW)
         ======================================================== -->
-        <section class="view-section active" id="map-view">
+        <section class="view-section active" id="map-view" role="tabpanel">
             <div class="taiwan-map-layout">
                 <!-- Left: Interactive SVG Taiwan Map -->
                 <div class="map-card-container">
@@ -1454,63 +1565,36 @@
                     </div>
 
                     <div class="taiwan-svg-box">
-                        <svg class="taiwan-svg" viewBox="0 0 650 780" id="taiwan-svg-element">
-                            <!-- Background HUD Coordinate Grid -->
-                            <line x1="50" y1="200" x2="600" y2="200" class="taiwan-grid-line" />
-                            <line x1="50" y1="400" x2="600" y2="400" class="taiwan-grid-line" />
-                            <line x1="50" y1="600" x2="600" y2="600" class="taiwan-grid-line" />
-                            <line x1="200" y1="50" x2="200" y2="720" class="taiwan-grid-line" />
-                            <line x1="400" y1="50" x2="400" y2="720" class="taiwan-grid-line" />
-
-                            <!-- Matsu Box Inset -->
-                            <g>
-                                <rect x="30" y="30" width="130" height="90" class="island-inset-box" />
-                                <text x="42" y="48" class="inset-label">連江縣 (馬祖群島)</text>
-                                <circle cx="75" cy="75" r="5" fill="rgba(168,85,247,0.4)" />
-                                <circle cx="110" cy="85" r="4" fill="rgba(168,85,247,0.4)" />
+                        <svg class="taiwan-svg" viewBox="0 0 650 780" id="taiwan-svg-element" role="img" aria-labelledby="taiwan-map-title taiwan-map-desc">
+                            <title id="taiwan-map-title">臺灣縣市預報溫度互動地圖</title>
+                            <desc id="taiwan-map-desc">以顏色呈現各縣市首時段預報均溫，可點選或使用鍵盤切換縣市。</desc>
+                            <defs>
+                                <radialGradient id="map-ocean-glow" cx="65%" cy="45%" r="58%">
+                                    <stop offset="0%" stop-color="#0e7490" stop-opacity="0.2" />
+                                    <stop offset="55%" stop-color="#312e81" stop-opacity="0.12" />
+                                    <stop offset="100%" stop-color="#020617" stop-opacity="0" />
+                                </radialGradient>
+                                <filter id="county-active-glow" x="-40%" y="-40%" width="180%" height="180%">
+                                    <feGaussianBlur stdDeviation="5" result="blur" />
+                                    <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                                </filter>
+                            </defs>
+                            <rect width="650" height="780" rx="24" fill="url(#map-ocean-glow)" />
+                            <g class="map-grid" aria-hidden="true">
+                                <path d="M20 160H630 M20 320H630 M20 480H630 M20 640H630 M170 20V760 M330 20V760 M490 20V760" />
                             </g>
-
-                            <!-- Kinmen Box Inset -->
-                            <g>
-                                <rect x="30" y="140" width="130" height="90" class="island-inset-box" />
-                                <text x="42" y="158" class="inset-label">金門縣 (金門外島)</text>
-                                <path d="M 60 190 Q 75 178 95 185 Q 115 178 130 188 Q 115 202 85 198 Z" fill="rgba(168,85,247,0.4)" />
+                            <g class="island-insets" aria-hidden="true">
+                                <rect x="15" y="20" width="155" height="140" rx="16" />
+                                <rect x="15" y="170" width="155" height="130" rx="16" />
+                                <rect x="15" y="325" width="155" height="160" rx="16" />
+                                <text x="30" y="42">馬祖</text>
+                                <text x="30" y="192">金門</text>
+                                <text x="30" y="347">澎湖</text>
                             </g>
-
-                            <!-- Penghu Box Inset -->
-                            <g>
-                                <rect x="30" y="320" width="130" height="130" class="island-inset-box" />
-                                <text x="42" y="338" class="inset-label">澎湖縣 (澎湖群島)</text>
-                                <circle cx="85" cy="380" r="10" fill="rgba(168,85,247,0.4)" />
-                                <circle cx="70" cy="405" r="6" fill="rgba(168,85,247,0.4)" />
-                                <circle cx="98" cy="415" r="5" fill="rgba(168,85,247,0.4)" />
-                            </g>
-
-                            <!-- Taiwan Main Island Stylized Contour Path -->
-                            <path class="taiwan-island-path" d="
-                                M 420 85
-                                C 445 95, 460 115, 445 135
-                                C 430 155, 420 175, 425 210
-                                C 430 240, 425 280, 415 330
-                                C 405 380, 395 430, 385 490
-                                C 375 540, 360 590, 345 640
-                                C 335 675, 315 675, 305 640
-                                C 295 605, 275 560, 260 520
-                                C 245 480, 230 435, 230 390
-                                C 230 350, 240 300, 255 250
-                                C 270 200, 290 160, 320 120
-                                C 350 85, 385 75, 420 85 Z
-                            " />
-
-                            <!-- Central Mountain Range visual glow spine -->
-                            <path d="M 390 150 Q 370 300 350 450 Q 330 550 320 620" 
-                                  stroke="rgba(255,255,255,0.08)" stroke-width="12" fill="none" stroke-linecap="round" />
-                            <path d="M 390 150 Q 370 300 350 450 Q 330 550 320 620" 
-                                  stroke="rgba(168,85,247,0.25)" stroke-width="4" fill="none" stroke-linecap="round" />
-
-                            <!-- Interactive County Markers Layer -->
-                            <g id="map-markers-layer"></g>
+                            <g id="county-shapes-layer"></g>
                         </svg>
+                        <div class="map-hover-tooltip" id="map-hover-tooltip" hidden></div>
+                        <div class="map-hint"><span>點選縣市查看預報</span><span>顏色代表首時段預報均溫</span></div>
                     </div>
                 </div>
 
@@ -1562,14 +1646,14 @@
                     <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px;">
                         <div style="font-size: 0.76rem; color: var(--text-muted); margin-bottom: 8px;">快速切換重點都會區：</div>
                         <div class="quick-county-chips">
-                            <button class="quick-chip" onclick="selectCountyByName('臺北市')">臺北市</button>
-                            <button class="quick-chip" onclick="selectCountyByName('新北市')">新北市</button>
-                            <button class="quick-chip" onclick="selectCountyByName('桃園市')">桃園市</button>
-                            <button class="quick-chip" onclick="selectCountyByName('臺中市')">臺中市</button>
-                            <button class="quick-chip" onclick="selectCountyByName('臺南市')">臺南市</button>
-                            <button class="quick-chip" onclick="selectCountyByName('高雄市')">高雄市</button>
-                            <button class="quick-chip" onclick="selectCountyByName('花蓮縣')">花蓮縣</button>
-                            <button class="quick-chip" onclick="selectCountyByName('宜蘭縣')">宜蘭縣</button>
+                            <button type="button" class="quick-chip" onclick="selectCountyByName('臺北市')">臺北市</button>
+                            <button type="button" class="quick-chip" onclick="selectCountyByName('新北市')">新北市</button>
+                            <button type="button" class="quick-chip" onclick="selectCountyByName('桃園市')">桃園市</button>
+                            <button type="button" class="quick-chip" onclick="selectCountyByName('臺中市')">臺中市</button>
+                            <button type="button" class="quick-chip" onclick="selectCountyByName('臺南市')">臺南市</button>
+                            <button type="button" class="quick-chip" onclick="selectCountyByName('高雄市')">高雄市</button>
+                            <button type="button" class="quick-chip" onclick="selectCountyByName('花蓮縣')">花蓮縣</button>
+                            <button type="button" class="quick-chip" onclick="selectCountyByName('宜蘭縣')">宜蘭縣</button>
                         </div>
                     </div>
                 </aside>
@@ -1579,25 +1663,25 @@
         <!-- ========================================================
              VIEW 2: 即時氣象衛星與雷達圖資中心 (IMAGERY HUB)
         ======================================================== -->
-        <section class="view-section" id="imagery-view">
+        <section class="view-section" id="imagery-view" role="tabpanel">
             <div class="imagery-hub-card">
                 <div class="imagery-header">
                     <div class="imagery-title-group">
                         <h2><span>🛰️</span> 中央氣象署 (CWA) 即時高解析度氣象影像</h2>
-                        <p>同步交通部中央氣象署最新對流回波、紅外線真實色彩雲圖與全台地表溫度分佈</p>
+                        <p>同步交通部中央氣象署最新雷達回波、彩色紅外線衛星雲圖與全臺氣溫分佈</p>
                     </div>
 
                     <div class="imagery-tabs" id="imagery-tabs">
-                        <button class="img-tab-btn active" data-img="radar-tw">
+                        <button type="button" class="img-tab-btn active" data-img="radar-tw" aria-pressed="true">
                             <span>📡</span> 臺灣雷達回波
                         </button>
-                        <button class="img-tab-btn" data-img="satellite-ir">
+                        <button type="button" class="img-tab-btn" data-img="satellite-ir" aria-pressed="false">
                             <span>🛰️</span> 彩色紅外線雲圖
                         </button>
-                        <button class="img-tab-btn" data-img="temp-map">
+                        <button type="button" class="img-tab-btn" data-img="temp-map" aria-pressed="false">
                             <span>🌡️</span> 全台即時氣溫圖
                         </button>
-                        <button class="img-tab-btn" data-img="radar-wide">
+                        <button type="button" class="img-tab-btn" data-img="radar-wide" aria-pressed="false">
                             <span>🌀</span> 廣域雷達合成
                         </button>
                     </div>
@@ -1605,17 +1689,19 @@
 
                 <!-- Main Active Image Viewer Stage -->
                 <div class="imagery-display-stage" id="imagery-stage">
-                    <img src="https://www.cwa.gov.tw/Data/radar/CV1_TW_3600.png" 
-                         alt="CWA 即時氣象圖像" 
+                    <img alt="CWA 即時氣象圖像"
                          class="live-image" 
-                         id="main-live-image">
+                         id="main-live-image"
+                         decoding="async">
+
+                    <div class="image-load-status" id="image-load-status">切換至本頁後載入最新圖資</div>
                     
                     <div class="image-overlay-info">
                         <div>
                             <span class="img-badge">● 即時觀測更新</span>
                             <span id="active-image-caption" style="margin-left: 10px; color: #ffffff; font-weight: 500;">臺灣全區雷達回波合成圖（降雨與對流粒子觀測）</span>
                         </div>
-                        <button class="image-refresh-btn" onclick="refreshActiveImage()">
+                        <button type="button" class="image-refresh-btn" onclick="refreshActiveImage()">
                             🔄 重新載入最新影像
                         </button>
                     </div>
@@ -1623,45 +1709,45 @@
 
                 <!-- Thumbnails Quick Select Gallery -->
                 <div class="imagery-thumbnails-grid">
-                    <div class="thumb-card active" onclick="switchLiveImage('radar-tw')">
-                        <div class="thumb-img-wrapper">
-                            <img src="https://www.cwa.gov.tw/Data/radar/CV1_TW_3600.png" alt="臺灣雷達回波">
-                        </div>
-                        <div class="thumb-info">
-                            <div class="thumb-title">臺灣雷達回波 (TW)</div>
-                            <div class="thumb-sub">高解析度即時降水粒子回波</div>
-                        </div>
-                    </div>
+                    <button type="button" class="thumb-card active" data-img="radar-tw" aria-pressed="true">
+                        <span class="thumb-img-wrapper">
+                            <img data-src="https://www.cwa.gov.tw/Data/radar/CV1_TW_3600.png" alt="臺灣雷達回波" loading="lazy" decoding="async" fetchpriority="low">
+                        </span>
+                        <span class="thumb-info">
+                            <span class="thumb-title">臺灣雷達回波 (TW)</span>
+                            <span class="thumb-sub">高解析度即時降水粒子回波</span>
+                        </span>
+                    </button>
 
-                    <div class="thumb-card" onclick="switchLiveImage('satellite-ir')">
-                        <div class="thumb-img-wrapper">
-                            <img src="https://www.cwa.gov.tw/Data/satellite/LCC_IR1_CR_2750/LCC_IR1_CR_2750.jpg" alt="彩色紅外線雲圖">
-                        </div>
-                        <div class="thumb-info">
-                            <div class="thumb-title">彩色紅外線衛星雲圖</div>
-                            <div class="thumb-sub">高空雲系、雲頂溫度及對流鋒面</div>
-                        </div>
-                    </div>
+                    <button type="button" class="thumb-card" data-img="satellite-ir" aria-pressed="false">
+                        <span class="thumb-img-wrapper">
+                            <img data-src="https://www.cwa.gov.tw/Data/satellite/LCC_IR1_CR_2750/LCC_IR1_CR_2750.jpg" alt="彩色紅外線雲圖" loading="lazy" decoding="async" fetchpriority="low">
+                        </span>
+                        <span class="thumb-info">
+                            <span class="thumb-title">彩色紅外線衛星雲圖</span>
+                            <span class="thumb-sub">高空雲系、雲頂溫度及對流鋒面</span>
+                        </span>
+                    </button>
 
-                    <div class="thumb-card" onclick="switchLiveImage('temp-map')">
-                        <div class="thumb-img-wrapper">
-                            <img src="https://www.cwa.gov.tw/Data/temperature/temp.jpg" alt="全台即時氣溫圖">
-                        </div>
-                        <div class="thumb-info">
-                            <div class="thumb-title">全台即時氣溫分佈圖</div>
-                            <div class="thumb-sub">各自動氣象站實測等溫線分佈</div>
-                        </div>
-                    </div>
+                    <button type="button" class="thumb-card" data-img="temp-map" aria-pressed="false">
+                        <span class="thumb-img-wrapper">
+                            <img data-src="https://www.cwa.gov.tw/Data/temperature/temp.jpg" alt="全臺即時氣溫圖" loading="lazy" decoding="async" fetchpriority="low">
+                        </span>
+                        <span class="thumb-info">
+                            <span class="thumb-title">全臺即時氣溫分佈圖</span>
+                            <span class="thumb-sub">各自動氣象站實測等溫線分佈</span>
+                        </span>
+                    </button>
 
-                    <div class="thumb-card" onclick="switchLiveImage('radar-wide')">
-                        <div class="thumb-img-wrapper">
-                            <img src="https://www.cwa.gov.tw/Data/radar/CV1_3600.png" alt="廣域雷達合成">
-                        </div>
-                        <div class="thumb-info">
-                            <div class="thumb-title">廣域雷達整合圖</div>
-                            <div class="thumb-sub">包含臺灣海峽及周邊海域水氣</div>
-                        </div>
-                    </div>
+                    <button type="button" class="thumb-card" data-img="radar-wide" aria-pressed="false">
+                        <span class="thumb-img-wrapper">
+                            <img data-src="https://www.cwa.gov.tw/Data/radar/CV1_3600.png" alt="廣域雷達合成" loading="lazy" decoding="async" fetchpriority="low">
+                        </span>
+                        <span class="thumb-info">
+                            <span class="thumb-title">廣域雷達整合圖</span>
+                            <span class="thumb-sub">包含臺灣海峽及周邊海域水氣</span>
+                        </span>
+                    </button>
                 </div>
             </div>
         </section>
@@ -1669,16 +1755,16 @@
         <!-- ========================================================
              VIEW 3: 22 縣市卡片清單模式 (CARDS LIST VIEW)
         ======================================================== -->
-        <section class="view-section" id="list-view">
+        <section class="view-section" id="list-view" role="tabpanel">
             <!-- Filter & Search Controls -->
             <div class="controls-card">
                 <div class="region-tabs" id="region-tabs">
-                    <button class="region-btn active" data-region="all">全台 (22)</button>
-                    <button class="region-btn" data-region="north">北部 (7)</button>
-                    <button class="region-btn" data-region="central">中部 (6)</button>
-                    <button class="region-btn" data-region="south">南部 (3)</button>
-                    <button class="region-btn" data-region="east">東部 (3)</button>
-                    <button class="region-btn" data-region="islands">離島 (3)</button>
+                    <button type="button" class="region-btn active" data-region="all">全臺 (22)</button>
+                    <button type="button" class="region-btn" data-region="north">北部 (7)</button>
+                    <button type="button" class="region-btn" data-region="central">中部 (6)</button>
+                    <button type="button" class="region-btn" data-region="south">南部 (3)</button>
+                    <button type="button" class="region-btn" data-region="east">東部 (3)</button>
+                    <button type="button" class="region-btn" data-region="islands">離島 (3)</button>
                 </div>
 
                 <div class="search-refresh-group">
@@ -1686,7 +1772,7 @@
                         <span class="search-icon">🔍</span>
                         <input type="text" id="county-search" placeholder="搜尋縣市 (如: 臺北)..." autocomplete="off">
                     </div>
-                    <button class="refresh-btn" id="refresh-btn" title="重新整理氣象資料" onclick="fetchWeather()">
+                    <button type="button" class="refresh-btn" id="refresh-btn" title="重新整理氣象資料" aria-label="重新整理氣象資料" onclick="fetchWeather()">
                         🔄
                     </button>
                 </div>
@@ -1699,7 +1785,7 @@
         <!-- Dashboard Footer -->
         <footer class="dashboard-footer">
             <p>Designed for EasyBoy5566 · 採用交通部中央氣象署 Open Data API (F-C0032-001) 及官方雷達/衛星圖資</p>
-            <p>© 2026 EasyBoy5566 · GitHub: <a href="https://github.com/EasyBoy5566/L2web" target="_blank">EasyBoy5566/L2web</a></p>
+            <p>© 2026 EasyBoy5566 · GitHub: <a href="https://github.com/EasyBoy5566/L2web" target="_blank" rel="noopener noreferrer">EasyBoy5566/L2web</a></p>
         </footer>
     </div>
 
@@ -1707,32 +1793,13 @@
         // CWA API Key
         const CWA_API_KEY = 'CWA-97D41E49-30C7-432B-A2A6-D5CB2A22AC36';
         const CWA_API_URL = `https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=${CWA_API_KEY}&format=JSON`;
-
-        // Geographic coordinates mapping on our 650x780 SVG map for all 22 counties
-        const COUNTY_GEO_COORDS = {
-            '基隆市': { x: 440, y: 72 },
-            '臺北市': { x: 395, y: 92 },
-            '新北市': { x: 350, y: 110 },
-            '桃園市': { x: 310, y: 125 },
-            '新竹市': { x: 275, y: 152 },
-            '新竹縣': { x: 325, y: 165 },
-            '苗栗縣': { x: 285, y: 200 },
-            '臺中市': { x: 275, y: 245 },
-            '彰化縣': { x: 240, y: 285 },
-            '南投縣': { x: 325, y: 320 },
-            '雲林縣': { x: 235, y: 345 },
-            '嘉義市': { x: 250, y: 390 },
-            '嘉義縣': { x: 295, y: 385 },
-            '臺南市': { x: 245, y: 445 },
-            '高雄市': { x: 270, y: 505 },
-            '屏東縣': { x: 300, y: 580 },
-            '宜蘭縣': { x: 425, y: 175 },
-            '花蓮縣': { x: 410, y: 310 },
-            '臺東縣': { x: 375, y: 495 },
-            '澎湖縣': { x: 95, y: 385 },
-            '金門縣': { x: 95, y: 185 },
-            '連江縣': { x: 95, y: 80 }
-        };
+        const TAIPEI_TIME_ZONE = 'Asia/Taipei';
+        const WEATHER_CACHE_KEY = 'l2web-weather-cache-v1';
+        const REQUEST_TIMEOUT_MS = 10000;
+        const EXPECTED_COUNTY_COUNT = 22;
+        // Simplified county boundaries derived from g0v/twgeojson (CC0 1.0).
+        // Paths are embedded so the map remains available without another network request.
+        const COUNTY_MAP_PATHS = {"臺東縣":{"d":"M496.7,584.0L497.9,586.7L495.6,586.7L495.0,585.4L491.0,583.9L491.4,581.3L489.4,579.2L489.3,577.4L495.4,577.9L498.6,577.4L498.7,580.3L496.7,584.0ZM495.8,423.2L492.2,431.1L490.9,436.0L491.1,437.8L490.2,440.9L490.1,444.2L489.0,447.8L486.1,448.5L484.1,450.9L481.9,455.0L481.8,457.4L480.8,458.4L479.1,464.6L480.3,465.7L478.3,468.3L475.7,469.5L475.8,473.9L477.7,478.1L476.1,481.8L476.5,485.3L478.5,487.0L476.4,488.7L475.5,488.0L473.5,490.8L471.2,492.2L469.3,492.3L465.7,498.0L465.2,501.5L464.0,504.1L463.3,507.8L461.5,508.9L459.3,515.5L455.8,520.1L453.2,521.5L449.3,530.1L447.9,531.3L445.1,536.1L443.7,536.4L442.3,539.4L440.9,538.8L436.9,539.6L433.4,542.7L432.9,546.7L433.9,547.5L435.7,553.5L432.0,555.3L431.3,558.9L429.9,561.8L426.6,563.4L420.8,569.0L415.2,572.0L410.5,574.0L406.1,577.7L401.7,579.8L399.2,583.5L397.2,589.5L396.5,595.7L391.6,599.8L389.5,604.1L386.3,613.0L383.7,622.7L378.8,634.6L377.3,637.3L376.0,642.6L374.8,644.0L373.2,647.7L372.7,651.0L372.6,659.4L373.5,665.6L370.3,668.0L367.4,669.0L365.8,666.7L361.9,666.2L357.0,662.2L353.8,663.4L353.4,659.5L355.2,659.3L355.0,657.9L352.5,657.6L351.8,656.0L349.3,655.1L349.4,652.9L352.4,652.1L353.1,650.6L352.4,647.6L350.8,645.4L347.2,645.0L346.3,642.6L344.2,642.4L342.3,640.9L343.4,638.3L345.0,636.6L344.1,635.8L345.2,633.3L346.6,632.5L349.7,632.4L351.7,630.7L348.8,625.4L349.1,624.2L345.3,622.3L343.9,622.3L344.5,619.5L343.8,618.1L346.5,615.7L346.3,613.7L344.4,611.6L343.7,606.9L341.5,603.4L341.9,599.9L343.4,599.2L342.8,595.6L344.6,593.1L344.3,591.1L346.0,587.3L351.0,580.6L352.1,577.4L351.1,574.5L355.5,575.3L358.0,573.9L361.0,573.8L363.8,569.6L370.9,569.5L373.2,565.4L372.9,559.5L375.0,557.7L374.9,552.7L372.5,550.3L367.8,549.2L366.4,547.2L367.0,543.9L367.9,540.8L365.9,539.8L367.1,537.9L366.1,536.7L362.4,536.1L359.7,531.4L360.6,529.8L358.3,525.1L358.9,521.7L358.1,519.9L360.0,518.0L360.4,515.9L362.3,515.0L362.4,513.7L364.4,512.0L364.2,510.9L366.2,510.3L366.3,505.8L370.1,504.8L370.4,502.9L368.0,499.7L371.3,493.7L372.1,489.4L371.2,487.4L371.8,484.0L371.3,482.4L369.4,481.0L373.2,479.1L373.9,475.9L376.1,475.2L376.8,473.8L375.6,471.8L376.6,469.2L376.6,465.3L377.5,463.3L379.6,462.0L382.0,461.9L388.7,454.5L391.8,454.7L396.8,452.2L400.4,451.3L402.6,450.6L406.2,452.7L407.3,455.0L407.4,457.6L410.9,464.4L413.5,464.2L416.8,466.3L421.0,466.3L423.2,470.8L426.5,471.1L427.6,469.8L430.5,469.0L433.6,470.6L435.1,473.4L435.3,476.1L438.0,480.3L437.9,482.5L441.7,483.5L443.3,485.6L445.5,485.0L449.1,488.6L448.6,490.7L450.2,491.9L452.7,490.1L456.4,489.2L459.1,489.3L460.5,487.4L460.0,483.8L461.4,480.8L459.4,478.3L460.7,475.5L462.9,475.6L465.4,469.2L465.3,467.6L467.4,466.3L466.6,464.7L468.4,461.5L468.0,460.4L471.8,456.9L471.5,451.5L473.8,448.5L474.3,446.5L476.2,446.0L476.7,443.7L478.3,441.3L480.8,439.4L480.9,438.4L477.8,437.5L476.3,433.3L478.4,430.5L480.3,426.3L483.0,423.6L484.6,423.4L485.9,421.3L488.9,422.2L491.2,422.0L492.7,424.0L495.8,423.2ZM498.6,701.8L496.6,699.6L497.8,698.4L499.3,699.4L503.2,699.3L510.5,698.5L510.7,702.1L511.8,703.5L509.7,705.4L510.9,707.7L517.2,711.7L515.7,715.4L511.0,715.3L510.8,714.1L507.5,710.8L503.5,710.4L500.2,707.1L498.1,704.1L498.6,701.8Z","group":"main"},"宜蘭縣":{"d":"M591.3,137.1L586.7,136.8L588.1,134.4L589.8,134.6L591.3,137.1ZM552.4,243.7L549.5,243.8L546.5,242.0L540.2,241.2L537.0,239.7L535.1,239.8L534.6,238.4L532.6,239.0L530.1,236.6L527.0,236.5L523.4,232.3L521.5,233.1L521.2,237.4L517.9,240.8L517.3,243.7L508.9,242.0L508.2,240.5L505.7,239.0L504.7,239.3L501.8,238.0L496.3,238.7L493.7,236.8L489.5,235.4L486.7,233.3L485.8,231.3L484.8,231.6L483.8,229.6L474.1,231.2L472.3,232.9L470.7,232.7L468.9,228.4L467.0,227.6L463.5,228.2L461.3,226.6L461.3,219.3L459.3,217.8L460.7,214.7L463.2,212.4L465.1,209.1L467.5,208.7L470.4,206.2L470.8,203.9L472.9,203.8L474.3,201.2L476.6,199.9L475.6,197.8L475.2,194.4L477.0,191.8L478.7,191.0L476.9,187.2L478.9,184.7L481.9,184.2L483.4,180.5L486.7,175.1L486.0,173.8L488.4,170.5L492.6,170.4L495.1,170.5L499.1,168.3L501.5,168.5L504.1,167.5L505.5,163.9L511.1,162.2L512.9,160.5L514.4,161.0L515.9,159.1L516.3,155.3L514.8,153.8L516.5,150.3L515.7,147.3L519.0,145.9L522.3,145.6L522.3,142.9L526.4,142.7L526.7,141.8L529.5,142.4L531.2,141.0L532.7,141.8L535.1,141.4L534.9,139.6L543.7,133.4L546.0,134.0L549.9,133.0L551.6,131.2L552.9,131.4L554.4,129.5L554.1,126.4L560.2,122.9L561.6,123.7L564.3,123.3L568.8,119.1L566.0,115.7L566.3,113.2L567.5,112.0L570.3,111.3L572.5,111.9L575.9,111.4L578.8,109.1L586.5,107.1L587.2,106.3L591.1,106.4L591.7,107.3L589.9,107.4L583.6,110.1L582.3,112.9L577.0,116.0L575.3,117.9L575.2,120.6L571.3,123.6L565.1,130.4L562.8,138.7L561.7,145.1L561.5,149.5L561.8,153.3L563.1,158.2L565.3,162.2L565.5,169.3L566.7,175.2L569.5,181.7L571.5,184.4L570.0,184.7L571.2,188.8L572.5,188.6L572.0,191.5L572.9,198.8L572.1,200.1L566.4,201.7L565.7,204.1L566.0,206.2L567.4,206.5L568.3,209.1L564.6,212.4L562.0,213.8L562.3,214.7L560.4,217.4L558.0,219.3L556.5,222.8L555.7,226.3L555.2,231.7L551.9,239.8L552.4,243.7Z","group":"main"},"臺北市":{"d":"M508.7,61.0L511.5,64.1L513.6,64.1L513.7,67.8L512.4,69.8L514.6,70.6L516.2,74.6L517.8,75.9L516.2,80.8L516.5,81.5L520.2,82.7L522.4,84.3L522.9,86.3L520.3,90.8L521.5,91.7L520.4,94.0L521.6,95.7L527.3,98.2L530.3,97.8L530.1,99.1L523.7,98.6L521.8,100.3L517.9,100.0L516.6,100.9L516.2,103.0L517.5,105.8L517.1,108.6L519.4,109.0L521.0,110.6L516.4,111.9L511.9,110.6L509.1,111.1L507.5,107.9L504.2,105.4L502.9,101.9L500.7,100.0L498.8,99.4L495.3,102.0L494.4,101.0L494.1,96.5L497.3,94.0L498.1,89.3L497.2,86.9L494.4,84.0L489.7,83.1L487.9,81.6L488.3,79.0L493.2,73.2L494.1,73.0L497.2,68.5L500.7,69.3L501.1,67.3L505.4,65.3L505.5,64.3L508.7,61.0Z","group":"main"},"雲林縣":{"d":"M217.5,403.7L216.6,403.7L216.4,400.8L218.5,401.0L217.5,403.7ZM210.5,405.5L209.3,403.5L210.7,401.3L212.1,402.5L210.5,405.5ZM202.8,412.0L200.2,414.4L196.7,414.1L195.3,415.8L195.6,418.0L191.6,418.0L190.0,416.8L193.9,413.1L207.2,405.0L209.2,405.8L209.7,407.7L207.4,407.5L204.9,409.1L202.8,412.0ZM339.8,387.3L338.5,388.7L340.1,390.0L340.0,394.1L337.2,395.8L335.4,394.5L332.2,394.3L328.6,395.5L327.4,393.9L323.4,395.1L322.0,393.7L323.0,390.9L318.2,391.4L316.9,392.7L308.3,392.8L304.2,390.9L300.2,390.6L296.2,387.2L294.0,384.1L293.4,382.3L289.8,383.2L288.3,382.8L284.5,383.5L281.3,383.2L278.3,385.7L272.8,384.0L269.5,385.2L268.1,387.4L265.4,387.9L263.4,390.7L258.7,391.1L258.5,393.9L255.8,395.1L253.2,395.2L254.0,396.7L250.5,396.8L250.0,399.4L247.0,401.1L246.2,403.5L244.3,402.9L242.9,400.5L240.0,401.4L241.0,406.6L239.9,408.0L236.2,409.0L230.6,407.3L227.5,407.8L224.6,406.4L222.9,406.6L220.4,405.6L221.3,403.4L219.1,399.8L219.5,387.0L219.2,385.1L220.3,378.9L221.4,378.1L223.9,372.5L227.1,368.7L225.2,367.5L226.1,361.7L227.6,357.1L225.2,357.1L224.4,354.7L225.5,354.3L227.7,349.0L226.6,347.5L231.5,344.8L234.1,344.0L236.2,341.4L235.2,340.3L237.0,339.1L240.1,340.0L242.7,341.7L253.5,344.5L264.1,343.9L266.2,342.8L274.3,343.3L279.0,342.5L282.9,345.2L289.2,347.3L294.9,348.7L298.5,348.9L303.2,348.5L311.6,350.5L319.2,350.7L321.3,351.5L324.4,357.8L324.4,361.8L321.3,362.8L321.0,366.9L322.8,372.5L322.6,374.6L320.2,378.9L320.2,380.8L319.0,382.3L320.0,385.5L322.2,383.1L323.9,383.5L323.6,386.2L325.6,387.4L330.1,387.3L331.7,385.4L334.5,386.0L336.4,385.1L337.2,383.4L339.7,385.7L339.8,387.3Z","group":"main"},"桃園市":{"d":"M452.5,79.9L452.3,81.4L454.1,82.9L455.4,82.5L456.4,84.1L460.9,85.0L463.8,86.8L465.3,86.8L467.1,90.6L471.5,90.4L474.0,91.5L473.7,92.6L475.9,93.4L475.9,97.7L478.6,100.1L475.7,100.6L476.6,104.0L469.9,108.6L466.9,108.4L464.5,107.5L461.4,108.3L461.9,110.6L461.6,114.3L462.3,114.9L459.1,116.4L460.9,119.5L459.4,120.9L461.2,122.4L460.0,124.2L462.7,126.0L464.5,125.8L465.2,128.4L467.0,129.7L465.2,130.8L466.8,132.7L465.4,135.3L470.7,137.5L474.9,135.7L476.9,135.8L479.4,137.4L479.7,139.5L481.1,139.5L483.7,142.2L484.1,145.7L486.3,147.5L481.5,151.4L481.0,152.5L483.4,158.1L486.5,163.9L491.4,165.9L491.2,167.1L492.6,170.4L488.4,170.5L486.0,173.8L486.7,175.1L483.4,180.5L481.9,184.2L478.9,184.7L476.9,187.2L473.7,188.2L470.6,186.7L468.8,184.9L467.8,181.9L469.2,179.2L467.7,178.6L466.5,176.3L466.8,171.9L464.0,171.1L463.8,169.2L461.9,166.9L459.5,165.5L456.7,166.5L455.8,165.8L457.4,161.0L455.6,158.8L457.4,153.8L456.1,152.2L451.2,150.6L447.7,148.4L447.9,146.7L445.1,145.2L444.7,143.2L439.8,144.8L439.0,142.1L437.0,143.2L436.1,141.1L434.7,141.0L430.1,139.0L430.6,138.2L425.7,135.7L427.6,132.5L426.4,128.2L423.0,127.9L422.3,128.7L417.8,127.8L416.8,127.1L416.9,124.7L413.2,125.6L411.7,124.5L409.1,124.4L406.7,122.8L407.1,120.1L406.4,117.5L404.1,115.4L402.4,114.8L398.6,116.0L396.1,114.8L395.3,116.1L391.8,116.2L393.0,114.1L395.2,112.4L397.2,109.1L396.8,106.5L399.8,101.4L404.8,95.6L411.7,93.2L413.3,91.3L419.1,88.6L430.0,86.3L438.0,81.7L444.2,80.3L447.8,79.0L452.5,79.9Z","group":"main"},"屏東縣":{"d":"M263.8,650.3L262.6,649.6L264.8,646.5L265.5,644.1L268.4,643.4L270.0,644.4L269.7,646.0L267.7,647.1L265.8,649.3L263.8,650.3ZM277.2,618.6L277.5,614.3L276.9,610.1L278.5,604.9L279.7,604.2L281.0,601.2L281.8,596.3L281.5,593.4L280.0,592.1L279.1,588.7L279.5,587.3L279.7,580.2L280.9,576.3L282.7,573.5L283.6,569.3L283.2,558.9L285.3,552.6L286.3,546.4L287.8,544.9L294.7,546.9L297.4,546.0L303.5,546.9L306.0,545.1L307.8,542.9L314.2,537.8L317.2,537.2L322.2,535.3L322.9,537.0L324.9,536.4L325.5,540.5L327.9,541.2L329.2,539.9L331.5,539.5L334.6,536.1L338.6,536.2L342.2,537.7L344.7,539.5L346.9,542.7L349.4,545.5L352.4,544.3L352.6,542.0L354.1,542.3L358.4,539.3L361.4,539.6L363.6,542.1L364.7,540.9L367.0,543.9L366.4,547.2L367.8,549.2L372.5,550.3L374.9,552.7L375.0,557.7L372.9,559.5L373.2,565.4L370.9,569.5L363.8,569.6L361.0,573.8L358.0,573.9L355.5,575.3L351.1,574.5L352.1,577.4L351.0,580.6L346.0,587.3L344.3,591.1L344.6,593.1L342.8,595.6L343.4,599.2L341.9,599.9L341.5,603.4L343.7,606.9L344.4,611.6L346.3,613.7L346.5,615.7L343.8,618.1L344.5,619.5L343.9,622.3L345.3,622.3L349.1,624.2L348.8,625.4L351.7,630.7L349.7,632.4L346.6,632.5L345.2,633.3L344.1,635.8L345.0,636.6L343.4,638.3L342.3,640.9L344.2,642.4L346.3,642.6L347.2,645.0L350.8,645.4L352.4,647.6L353.1,650.6L352.4,652.1L349.4,652.9L349.3,655.1L351.8,656.0L352.5,657.6L355.0,657.9L355.2,659.3L353.4,659.5L353.8,663.4L357.0,662.2L361.9,666.2L365.8,666.7L367.4,669.0L370.3,668.0L373.5,665.6L374.1,668.1L373.0,671.4L373.5,674.4L372.4,675.9L373.0,679.7L372.5,685.7L373.7,686.6L371.4,688.8L372.9,693.8L374.3,694.3L374.0,696.7L372.5,698.3L373.0,706.1L374.4,708.9L371.8,710.5L371.6,712.4L369.5,713.5L369.1,716.0L366.5,717.5L363.2,718.3L362.2,726.2L366.4,732.8L367.4,736.1L366.3,737.0L363.7,736.1L363.5,733.6L360.9,732.5L358.4,729.2L356.4,729.4L353.5,728.6L353.5,727.7L350.3,727.2L347.0,724.3L344.5,724.8L342.4,727.2L343.0,729.3L341.5,732.2L339.0,732.5L335.8,729.3L336.1,722.9L336.7,721.5L334.8,716.8L333.3,716.2L330.8,711.7L330.8,709.2L332.5,707.4L333.0,704.7L334.9,703.2L333.7,698.3L336.9,696.9L335.5,690.6L334.0,689.2L333.0,686.5L333.6,685.5L332.1,679.5L330.1,675.4L330.7,673.8L327.4,667.7L323.4,664.3L323.7,661.3L321.9,656.4L321.8,654.2L319.3,650.8L314.3,646.3L311.5,641.5L308.5,639.0L302.5,635.1L286.7,626.9L282.8,624.5L280.2,621.3L281.2,620.6L277.2,618.6Z","group":"main"},"臺中市":{"d":"M317.4,217.9L321.1,220.6L322.9,224.2L324.9,224.9L328.8,229.5L331.4,231.5L332.0,233.0L334.9,234.9L339.7,236.1L346.3,241.3L350.6,242.9L355.1,243.5L357.4,245.1L360.6,248.6L365.6,248.9L369.1,247.7L375.2,248.2L378.7,246.2L377.6,239.6L381.5,237.9L382.9,238.7L385.8,238.7L389.0,239.9L391.0,239.3L393.0,240.6L395.6,240.2L398.2,244.3L401.6,247.2L403.9,247.6L405.3,246.8L405.9,244.6L411.2,241.8L412.2,243.1L413.8,242.7L416.8,240.4L419.3,240.4L420.1,238.2L423.4,234.5L428.9,234.3L429.9,231.8L433.3,230.0L434.8,227.0L436.9,226.7L438.6,230.4L441.9,229.4L442.4,226.8L444.2,225.1L444.6,221.7L447.6,220.3L449.4,220.6L456.8,219.6L459.3,217.8L461.3,219.3L461.3,226.6L463.5,228.2L467.0,227.6L468.9,228.4L470.7,232.7L472.3,232.9L474.1,231.2L483.8,229.6L484.8,231.6L485.8,231.3L486.7,233.3L484.6,234.5L483.3,236.8L482.7,240.5L483.2,242.0L480.9,244.8L477.2,244.9L476.6,247.4L474.3,248.7L472.2,250.8L473.2,253.9L473.1,255.8L469.4,256.4L466.5,258.0L466.5,259.9L464.5,262.2L461.9,260.6L455.6,259.7L454.4,261.0L451.8,260.9L449.5,259.3L448.7,257.7L447.0,257.9L444.4,262.4L443.1,262.9L439.4,261.0L437.1,262.5L434.8,262.2L431.7,264.5L428.8,261.8L427.5,263.8L424.8,264.3L422.3,267.7L416.1,267.5L414.2,268.6L411.9,271.8L406.8,274.5L405.3,276.1L404.3,275.1L398.7,275.3L397.1,276.4L394.6,281.8L393.0,283.2L389.6,284.0L386.8,283.4L384.4,281.8L380.9,284.9L378.3,286.0L373.2,284.1L372.5,287.9L370.6,289.9L369.5,289.3L370.5,287.4L368.6,284.0L365.6,283.9L364.9,282.5L363.0,282.5L361.3,284.0L359.7,288.6L359.8,293.3L355.3,294.7L354.6,297.0L350.7,303.0L348.0,304.9L347.8,306.0L345.2,306.7L342.8,308.2L339.9,306.1L337.4,305.9L334.8,306.8L329.1,305.0L324.4,301.6L322.2,302.6L318.8,300.0L317.8,297.2L318.2,293.8L316.2,290.7L315.6,287.0L307.5,285.8L302.8,284.7L301.0,282.6L299.3,282.1L297.5,279.4L297.9,277.5L294.3,269.7L289.8,267.6L290.3,265.9L286.2,264.5L287.9,262.1L290.7,255.8L292.3,254.0L294.8,248.2L296.5,247.0L298.4,243.8L301.3,245.4L302.8,243.5L303.2,239.8L304.7,235.6L310.4,227.9L312.1,224.3L314.7,221.9L317.4,217.9Z","group":"main"},"臺南市":{"d":"M324.0,466.1L324.5,467.4L321.9,470.4L320.5,473.0L321.2,474.6L319.3,477.2L316.4,478.6L315.5,481.0L313.3,482.5L310.7,486.7L310.6,488.6L307.8,492.6L307.9,493.2L303.5,498.0L301.3,498.9L293.4,506.0L289.1,508.7L288.2,511.2L284.6,511.2L283.1,516.2L281.4,516.0L279.0,520.9L275.6,529.0L274.0,529.8L272.0,527.7L268.3,528.2L266.6,530.7L264.6,531.9L262.3,534.5L258.5,534.5L256.8,532.2L254.8,532.3L247.4,531.4L246.6,533.3L243.7,531.9L242.5,533.4L240.2,531.6L238.2,531.2L237.9,529.2L235.6,530.3L229.8,528.0L226.4,529.9L226.5,525.8L225.8,522.6L222.6,516.3L218.8,512.3L213.3,508.2L206.4,504.1L201.6,502.1L200.8,500.0L197.1,496.9L197.8,491.2L199.1,488.6L203.2,482.6L204.8,474.2L207.4,469.0L207.3,464.0L208.5,463.3L210.6,451.7L211.6,451.5L214.3,446.0L214.7,442.5L220.9,446.7L221.0,447.7L225.5,449.8L227.5,452.5L229.1,450.4L232.3,452.3L235.7,451.5L239.2,445.2L242.9,444.4L245.1,442.4L244.8,440.0L247.0,440.9L249.0,440.4L249.0,437.0L250.4,435.3L254.1,435.3L254.1,433.2L258.7,433.1L261.9,430.0L268.4,429.6L273.9,427.5L278.5,428.9L280.1,427.5L287.2,430.7L288.5,432.8L290.6,431.2L292.5,432.8L289.4,434.5L291.5,436.5L293.6,436.6L295.1,439.4L293.4,440.2L294.3,441.9L295.8,441.8L299.5,443.2L300.8,445.0L297.3,448.3L298.0,452.2L297.1,453.2L297.2,456.0L299.2,459.8L298.9,461.1L296.5,463.1L298.0,464.7L301.1,465.4L303.8,467.5L306.0,466.8L308.6,468.0L310.3,466.1L312.5,465.2L315.0,466.5L318.8,465.1L324.0,466.1Z","group":"main"},"基隆市":{"d":"M558.5,76.2L558.9,78.4L557.4,80.5L555.8,80.9L552.4,79.4L551.1,80.9L548.9,81.7L550.0,87.9L551.4,87.9L552.9,89.6L550.2,92.2L549.5,91.7L546.3,93.2L544.0,93.1L540.0,90.0L537.3,90.1L535.1,89.2L527.0,83.1L525.9,77.8L523.1,76.5L522.5,75.4L524.1,74.5L527.1,74.3L528.9,72.8L532.9,72.1L535.8,69.9L539.3,68.1L538.9,70.2L542.6,70.2L547.2,72.0L550.4,70.5L552.7,72.8L554.3,73.1L558.5,76.2Z","group":"main"},"南投縣":{"d":"M464.5,262.2L465.9,264.9L465.9,266.9L461.0,267.9L459.1,270.1L457.1,271.1L453.1,271.7L453.5,275.7L452.1,280.2L454.9,280.8L459.2,284.1L461.7,284.6L461.1,286.9L459.7,288.4L460.6,290.6L457.5,292.9L455.7,295.3L455.0,294.8L452.4,296.9L452.9,299.9L451.1,302.9L449.7,306.5L447.9,309.1L448.7,312.9L450.5,313.0L451.4,314.9L450.1,320.5L451.0,323.7L451.0,326.3L447.9,327.7L449.4,331.7L448.8,333.8L446.3,334.8L445.4,338.0L443.5,340.4L442.5,346.2L441.0,347.0L441.2,351.7L436.4,354.3L436.8,356.3L441.3,360.0L443.8,367.2L443.5,371.8L442.1,373.8L442.8,376.7L440.3,381.6L440.5,383.9L439.0,386.5L438.2,389.3L436.8,390.3L434.3,389.4L431.3,391.5L431.2,392.8L426.0,392.2L425.6,394.7L427.4,395.7L426.7,397.7L424.5,398.7L425.5,400.6L424.6,404.3L422.3,406.8L419.2,405.6L415.8,406.0L414.5,405.4L413.4,406.9L408.6,406.1L407.3,410.0L405.4,411.2L405.6,412.4L402.6,415.1L406.7,417.7L405.2,419.9L401.7,421.0L397.7,423.1L396.8,420.9L397.9,419.7L396.2,417.5L394.6,417.6L388.7,416.2L386.0,416.1L383.9,416.6L381.9,415.4L380.7,415.9L377.9,414.9L371.6,414.9L370.3,416.5L366.8,415.3L361.9,415.8L359.4,413.3L358.0,405.5L355.6,402.5L356.7,398.4L358.1,397.1L357.8,394.6L359.0,392.3L356.7,389.3L354.6,390.1L349.2,389.0L346.4,386.9L344.6,386.5L339.8,387.3L339.7,385.7L337.2,383.4L336.4,385.1L334.5,386.0L331.7,385.4L330.1,387.3L325.6,387.4L323.6,386.2L323.9,383.5L322.2,383.1L320.0,385.5L319.0,382.3L320.2,380.8L320.2,378.9L322.6,374.6L322.8,372.5L321.0,366.9L321.3,362.8L324.4,361.8L324.4,357.8L321.3,351.5L326.6,350.0L329.2,347.5L328.2,344.6L323.6,346.1L320.5,343.6L318.4,340.3L316.9,340.1L318.5,336.8L317.1,335.3L320.2,328.5L319.6,327.6L320.6,323.3L319.0,322.2L320.5,320.6L318.6,317.7L320.2,317.6L322.6,315.3L323.2,310.9L320.7,309.2L321.7,306.1L327.9,306.7L329.1,305.0L334.8,306.8L337.4,305.9L339.9,306.1L342.8,308.2L345.2,306.7L347.8,306.0L348.0,304.9L350.7,303.0L354.6,297.0L355.3,294.7L359.8,293.3L359.7,288.6L361.3,284.0L363.0,282.5L364.9,282.5L365.6,283.9L368.6,284.0L370.5,287.4L369.5,289.3L370.6,289.9L372.5,287.9L373.2,284.1L378.3,286.0L380.9,284.9L384.4,281.8L386.8,283.4L389.6,284.0L393.0,283.2L394.6,281.8L397.1,276.4L398.7,275.3L404.3,275.1L405.3,276.1L406.8,274.5L411.9,271.8L414.2,268.6L416.1,267.5L422.3,267.7L424.8,264.3L427.5,263.8L428.8,261.8L431.7,264.5L434.8,262.2L437.1,262.5L439.4,261.0L443.1,262.9L444.4,262.4L447.0,257.9L448.7,257.7L449.5,259.3L451.8,260.9L454.4,261.0L455.6,259.7L461.9,260.6L464.5,262.2Z","group":"main"},"苗栗縣":{"d":"M447.6,220.3L444.6,221.7L444.2,225.1L442.4,226.8L441.9,229.4L438.6,230.4L436.9,226.7L434.8,227.0L433.3,230.0L429.9,231.8L428.9,234.3L423.4,234.5L420.1,238.2L419.3,240.4L416.8,240.4L413.8,242.7L412.2,243.1L411.2,241.8L405.9,244.6L405.3,246.8L403.9,247.6L401.6,247.2L398.2,244.3L395.6,240.2L393.0,240.6L391.0,239.3L389.0,239.9L385.8,238.7L382.9,238.7L381.5,237.9L377.6,239.6L378.7,246.2L375.2,248.2L369.1,247.7L365.6,248.9L360.6,248.6L357.4,245.1L355.1,243.5L350.6,242.9L346.3,241.3L339.7,236.1L334.9,234.9L332.0,233.0L331.4,231.5L328.8,229.5L324.9,224.9L322.9,224.2L321.1,220.6L317.4,217.9L319.7,216.5L326.6,209.0L327.7,205.9L330.8,201.2L332.8,195.6L334.7,192.0L335.7,188.3L338.8,183.8L341.0,183.0L345.5,182.6L346.0,177.4L349.8,173.0L357.2,171.4L359.7,171.3L360.7,169.0L365.8,165.0L367.2,160.2L369.9,157.9L372.4,158.6L375.4,156.8L377.5,160.9L381.5,162.5L382.4,163.4L384.4,162.8L385.5,164.2L388.9,162.5L389.3,165.7L387.7,168.1L389.8,168.5L390.0,170.3L394.1,174.3L396.8,174.0L396.3,176.4L399.8,177.1L400.7,178.8L403.5,179.9L405.5,182.3L407.4,181.0L409.7,182.8L411.2,185.4L411.6,187.5L410.1,189.3L409.0,192.9L407.5,194.1L411.1,197.5L410.6,200.0L408.3,201.2L409.3,206.2L412.3,205.7L414.7,206.6L419.9,203.8L422.6,204.5L424.2,203.5L425.3,204.6L429.1,205.3L431.0,204.3L432.7,204.8L435.6,203.5L440.3,204.6L439.3,206.2L442.5,208.4L444.5,212.0L447.3,213.3L448.2,215.0L447.3,217.9L447.6,220.3Z","group":"main"},"嘉義市":{"d":"M278.1,408.0L279.4,406.4L282.0,406.2L283.7,407.4L285.4,410.0L287.3,408.5L289.2,408.8L290.1,411.5L292.9,412.0L294.6,415.0L291.7,419.5L290.5,419.6L287.9,417.6L286.3,417.7L283.0,421.1L280.3,422.2L278.2,417.8L275.3,418.0L272.1,415.8L271.0,413.4L273.0,409.1L274.7,410.1L278.1,408.0Z","group":"main"},"新竹縣":{"d":"M391.8,116.2L395.3,116.1L396.1,114.8L398.6,116.0L402.4,114.8L404.1,115.4L406.4,117.5L407.1,120.1L406.7,122.8L409.1,124.4L411.7,124.5L413.2,125.6L416.9,124.7L416.8,127.1L417.8,127.8L422.3,128.7L423.0,127.9L426.4,128.2L427.6,132.5L425.7,135.7L430.6,138.2L430.1,139.0L434.7,141.0L436.1,141.1L437.0,143.2L439.0,142.1L439.8,144.8L444.7,143.2L445.1,145.2L447.9,146.7L447.7,148.4L451.2,150.6L456.1,152.2L457.4,153.8L455.6,158.8L457.4,161.0L455.8,165.8L456.7,166.5L459.5,165.5L461.9,166.9L463.8,169.2L464.0,171.1L466.8,171.9L466.5,176.3L467.7,178.6L469.2,179.2L467.8,181.9L468.8,184.9L470.6,186.7L473.7,188.2L476.9,187.2L478.7,191.0L477.0,191.8L475.2,194.4L475.6,197.8L476.6,199.9L474.3,201.2L472.9,203.8L470.8,203.9L470.4,206.2L467.5,208.7L465.1,209.1L463.2,212.4L460.7,214.7L459.3,217.8L456.8,219.6L449.4,220.6L447.6,220.3L447.3,217.9L448.2,215.0L447.3,213.3L444.5,212.0L442.5,208.4L439.3,206.2L440.3,204.6L435.6,203.5L432.7,204.8L431.0,204.3L429.1,205.3L425.3,204.6L424.2,203.5L422.6,204.5L419.9,203.8L414.7,206.6L412.3,205.7L409.3,206.2L408.3,201.2L410.6,200.0L411.1,197.5L407.5,194.1L409.0,192.9L410.1,189.3L411.6,187.5L411.2,185.4L409.7,182.8L407.4,181.0L405.5,182.3L403.5,179.9L400.7,178.8L399.8,177.1L396.3,176.4L396.8,174.0L394.1,174.3L390.0,170.3L389.8,168.5L387.7,168.1L389.3,165.7L388.9,162.5L385.5,164.2L384.4,162.8L382.4,163.4L381.5,162.5L382.0,159.0L383.7,155.8L385.2,156.2L388.0,153.5L388.5,151.8L390.5,152.2L392.0,151.1L391.7,149.4L393.2,148.6L397.4,150.6L398.7,153.4L401.3,152.4L400.2,148.2L398.9,145.9L398.3,143.2L394.7,140.1L385.5,137.7L381.1,133.9L381.2,131.9L383.6,129.4L385.0,125.9L386.5,124.1L387.6,120.9L390.7,116.3L391.8,116.2Z","group":"main"},"新北市":{"d":"M492.6,170.4L491.2,167.1L491.4,165.9L486.5,163.9L483.4,158.1L481.0,152.5L481.5,151.4L486.3,147.5L484.1,145.7L483.7,142.2L481.1,139.5L479.7,139.5L479.4,137.4L476.9,135.8L474.9,135.7L470.7,137.5L465.4,135.3L466.8,132.7L465.2,130.8L467.0,129.7L465.2,128.4L464.5,125.8L462.7,126.0L460.0,124.2L461.2,122.4L459.4,120.9L460.9,119.5L459.1,116.4L462.3,114.9L461.6,114.3L461.9,110.6L461.4,108.3L464.5,107.5L466.9,108.4L469.9,108.6L476.6,104.0L475.7,100.6L478.6,100.1L475.9,97.7L475.9,93.4L473.7,92.6L474.0,91.5L471.5,90.4L467.1,90.6L465.3,86.8L463.8,86.8L460.9,85.0L456.4,84.1L455.4,82.5L454.1,82.9L452.3,81.4L452.5,79.9L456.8,78.1L458.0,78.7L462.6,78.4L466.1,77.4L473.5,74.2L476.3,72.3L478.9,69.6L477.6,68.4L478.1,65.5L479.9,64.2L483.0,59.8L484.3,59.2L486.0,53.7L491.2,52.0L492.4,49.2L499.3,45.6L502.2,45.6L504.9,43.7L509.0,44.3L510.5,43.1L512.8,43.0L516.9,44.9L518.4,46.4L520.6,47.2L523.8,50.9L524.0,55.0L525.8,56.8L527.4,56.8L528.0,59.8L531.6,62.5L536.1,61.4L536.4,62.5L534.6,65.2L536.0,67.1L539.3,68.1L535.8,69.9L532.9,72.1L528.9,72.8L527.1,74.3L524.1,74.5L522.5,75.4L523.1,76.5L525.9,77.8L527.0,83.1L535.1,89.2L537.3,90.1L540.0,90.0L544.0,93.1L546.3,93.2L549.5,91.7L550.2,92.2L552.9,89.6L551.4,87.9L550.0,87.9L548.9,81.7L551.1,80.9L552.4,79.4L555.8,80.9L557.4,80.5L558.9,78.4L558.5,76.2L562.2,76.5L561.9,78.8L563.1,79.1L566.4,77.6L571.7,78.9L579.5,79.1L581.8,80.0L583.0,82.4L581.0,86.5L583.4,90.2L584.5,90.8L583.9,94.5L584.8,97.2L587.5,99.6L594.3,98.6L597.9,100.1L600.0,101.7L599.7,103.3L597.8,103.5L595.4,105.5L591.7,107.3L591.1,106.4L587.2,106.3L586.5,107.1L578.8,109.1L575.9,111.4L572.5,111.9L570.3,111.3L567.5,112.0L566.3,113.2L566.0,115.7L568.8,119.1L564.3,123.3L561.6,123.7L560.2,122.9L554.1,126.4L554.4,129.5L552.9,131.4L551.6,131.2L549.9,133.0L546.0,134.0L543.7,133.4L534.9,139.6L535.1,141.4L532.7,141.8L531.2,141.0L529.5,142.4L526.7,141.8L526.4,142.7L522.3,142.9L522.3,145.6L519.0,145.9L515.7,147.3L516.5,150.3L514.8,153.8L516.3,155.3L515.9,159.1L514.4,161.0L512.9,160.5L511.1,162.2L505.5,163.9L504.1,167.5L501.5,168.5L499.1,168.3L495.1,170.5L492.6,170.4ZM508.7,61.0L505.5,64.3L505.4,65.3L501.1,67.3L500.7,69.3L497.2,68.5L494.1,73.0L493.2,73.2L488.3,79.0L487.9,81.6L489.7,83.1L494.4,84.0L497.2,86.9L498.1,89.3L497.3,94.0L494.1,96.5L494.4,101.0L495.3,102.0L498.8,99.4L500.7,100.0L502.9,101.9L504.2,105.4L507.5,107.9L509.1,111.1L511.9,110.6L516.4,111.9L521.0,110.6L519.4,109.0L517.1,108.6L517.5,105.8L516.2,103.0L516.6,100.9L517.9,100.0L521.8,100.3L523.7,98.6L530.1,99.1L530.3,97.8L527.3,98.2L521.6,95.7L520.4,94.0L521.5,91.7L520.3,90.8L522.9,86.3L522.4,84.3L520.2,82.7L516.5,81.5L516.2,80.8L517.8,75.9L516.2,74.6L514.6,70.6L512.4,69.8L513.7,67.8L513.6,64.1L511.5,64.1L508.7,61.0Z","group":"main"},"花蓮縣":{"d":"M400.4,451.3L401.3,449.9L404.1,448.8L404.6,445.5L399.7,442.5L398.7,440.4L396.7,441.3L394.8,439.2L392.0,438.7L392.2,436.3L396.2,433.0L394.9,431.9L397.7,431.0L400.1,429.1L400.6,425.6L397.7,423.1L401.7,421.0L405.2,419.9L406.7,417.7L402.6,415.1L405.6,412.4L405.4,411.2L407.3,410.0L408.6,406.1L413.4,406.9L414.5,405.4L415.8,406.0L419.2,405.6L422.3,406.8L424.6,404.3L425.5,400.6L424.5,398.7L426.7,397.7L427.4,395.7L425.6,394.7L426.0,392.2L431.2,392.8L431.3,391.5L434.3,389.4L436.8,390.3L438.2,389.3L439.0,386.5L440.5,383.9L440.3,381.6L442.8,376.7L442.1,373.8L443.5,371.8L443.8,367.2L441.3,360.0L436.8,356.3L436.4,354.3L441.2,351.7L441.0,347.0L442.5,346.2L443.5,340.4L445.4,338.0L446.3,334.8L448.8,333.8L449.4,331.7L447.9,327.7L451.0,326.3L451.0,323.7L450.1,320.5L451.4,314.9L450.5,313.0L448.7,312.9L447.9,309.1L449.7,306.5L451.1,302.9L452.9,299.9L452.4,296.9L455.0,294.8L455.7,295.3L457.5,292.9L460.6,290.6L459.7,288.4L461.1,286.9L461.7,284.6L459.2,284.1L454.9,280.8L452.1,280.2L453.5,275.7L453.1,271.7L457.1,271.1L459.1,270.1L461.0,267.9L465.9,266.9L465.9,264.9L464.5,262.2L466.5,259.9L466.5,258.0L469.4,256.4L473.1,255.8L473.2,253.9L472.2,250.8L474.3,248.7L476.6,247.4L477.2,244.9L480.9,244.8L483.2,242.0L482.7,240.5L483.3,236.8L484.6,234.5L486.7,233.3L489.5,235.4L493.7,236.8L496.3,238.7L501.8,238.0L504.7,239.3L505.7,239.0L508.2,240.5L508.9,242.0L517.3,243.7L517.9,240.8L521.2,237.4L521.5,233.1L523.4,232.3L527.0,236.5L530.1,236.6L532.6,239.0L534.6,238.4L535.1,239.8L537.0,239.7L540.2,241.2L546.5,242.0L549.5,243.8L552.4,243.7L551.6,246.1L549.1,248.4L547.1,251.4L546.5,254.4L543.2,257.7L541.1,258.3L538.6,261.8L532.3,265.4L530.1,268.1L529.0,271.3L529.4,274.8L530.6,277.5L529.9,280.4L527.9,283.3L523.8,286.0L520.7,290.6L520.2,293.4L521.3,298.2L522.9,301.2L525.8,303.9L526.7,306.1L525.7,308.0L524.3,307.5L524.1,310.2L521.1,312.3L518.3,317.0L519.4,321.3L518.1,325.0L517.7,331.1L516.6,336.3L514.4,342.7L511.6,348.1L511.0,352.6L511.5,356.8L508.9,363.1L507.5,364.1L506.6,366.5L507.5,369.4L506.0,373.7L505.2,378.7L504.2,379.2L502.8,383.9L502.7,390.1L502.0,394.0L499.0,398.9L497.3,406.4L498.0,411.6L499.4,413.3L497.2,416.7L495.8,423.2L492.7,424.0L491.2,422.0L488.9,422.2L485.9,421.3L484.6,423.4L483.0,423.6L480.3,426.3L478.4,430.5L476.3,433.3L477.8,437.5L480.9,438.4L480.8,439.4L478.3,441.3L476.7,443.7L476.2,446.0L474.3,446.5L473.8,448.5L471.5,451.5L471.8,456.9L468.0,460.4L468.4,461.5L466.6,464.7L467.4,466.3L465.3,467.6L465.4,469.2L462.9,475.6L460.7,475.5L459.4,478.3L461.4,480.8L460.0,483.8L460.5,487.4L459.1,489.3L456.4,489.2L452.7,490.1L450.2,491.9L448.6,490.7L449.1,488.6L445.5,485.0L443.3,485.6L441.7,483.5L437.9,482.5L438.0,480.3L435.3,476.1L435.1,473.4L433.6,470.6L430.5,469.0L427.6,469.8L426.5,471.1L423.2,470.8L421.0,466.3L416.8,466.3L413.5,464.2L410.9,464.4L407.4,457.6L407.3,455.0L406.2,452.7L402.6,450.6L400.4,451.3Z","group":"main"},"高雄市":{"d":"M277.2,618.6L274.9,618.9L272.2,617.8L266.6,614.2L259.6,608.7L254.8,604.2L255.3,603.4L252.6,600.8L244.1,590.6L244.4,588.6L242.0,584.3L242.3,580.1L246.7,576.4L245.4,571.3L244.1,573.1L242.9,569.6L238.5,560.8L233.9,551.1L230.0,540.5L229.7,538.4L226.4,529.9L229.8,528.0L235.6,530.3L237.9,529.2L238.2,531.2L240.2,531.6L242.5,533.4L243.7,531.9L246.6,533.3L247.4,531.4L254.8,532.3L256.8,532.2L258.5,534.5L262.3,534.5L264.6,531.9L266.6,530.7L268.3,528.2L272.0,527.7L274.0,529.8L275.6,529.0L279.0,520.9L281.4,516.0L283.1,516.2L284.6,511.2L288.2,511.2L289.1,508.7L293.4,506.0L301.3,498.9L303.5,498.0L307.9,493.2L307.8,492.6L310.6,488.6L310.7,486.7L313.3,482.5L315.5,481.0L316.4,478.6L319.3,477.2L321.2,474.6L320.5,473.0L321.9,470.4L324.5,467.4L324.0,466.1L322.9,461.1L321.6,459.5L322.0,454.4L321.6,452.1L324.9,451.5L327.6,452.7L332.1,453.8L334.2,452.9L334.2,450.6L335.9,448.9L339.7,449.5L339.6,448.4L341.7,446.5L343.3,446.2L345.4,443.2L345.6,441.7L350.4,442.1L351.5,439.9L354.8,437.0L359.7,435.3L360.1,433.1L363.9,427.8L364.0,426.2L367.0,425.4L371.4,423.2L374.3,419.3L376.9,418.3L379.8,418.9L381.7,417.3L384.1,417.2L386.0,416.1L388.7,416.2L394.6,417.6L396.2,417.5L397.9,419.7L396.8,420.9L397.7,423.1L400.6,425.6L400.1,429.1L397.7,431.0L394.9,431.9L396.2,433.0L392.2,436.3L392.0,438.7L394.8,439.2L396.7,441.3L398.7,440.4L399.7,442.5L404.6,445.5L404.1,448.8L401.3,449.9L400.4,451.3L396.8,452.2L391.8,454.7L388.7,454.5L382.0,461.9L379.6,462.0L377.5,463.3L376.6,465.3L376.6,469.2L375.6,471.8L376.8,473.8L376.1,475.2L373.9,475.9L373.2,479.1L369.4,481.0L371.3,482.4L371.8,484.0L371.2,487.4L372.1,489.4L371.3,493.7L368.0,499.7L370.4,502.9L370.1,504.8L366.3,505.8L366.2,510.3L364.2,510.9L364.4,512.0L362.4,513.7L362.3,515.0L360.4,515.9L360.0,518.0L358.1,519.9L358.9,521.7L358.3,525.1L360.6,529.8L359.7,531.4L362.4,536.1L366.1,536.7L367.1,537.9L365.9,539.8L367.9,540.8L367.0,543.9L364.7,540.9L363.6,542.1L361.4,539.6L358.4,539.3L354.1,542.3L352.6,542.0L352.4,544.3L349.4,545.5L346.9,542.7L344.7,539.5L342.2,537.7L338.6,536.2L334.6,536.1L331.5,539.5L329.2,539.9L327.9,541.2L325.5,540.5L324.9,536.4L322.9,537.0L322.2,535.3L317.2,537.2L314.2,537.8L307.8,542.9L306.0,545.1L303.5,546.9L297.4,546.0L294.7,546.9L287.8,544.9L286.3,546.4L285.3,552.6L283.2,558.9L283.6,569.3L282.7,573.5L280.9,576.3L279.7,580.2L279.5,587.3L279.1,588.7L280.0,592.1L281.5,593.4L281.8,596.3L281.0,601.2L279.7,604.2L278.5,604.9L276.9,610.1L277.5,614.3L277.2,618.6Z","group":"main"},"彰化縣":{"d":"M321.3,351.5L319.2,350.7L311.6,350.5L303.2,348.5L298.5,348.9L294.9,348.7L289.2,347.3L282.9,345.2L279.0,342.5L274.3,343.3L266.2,342.8L264.1,343.9L253.5,344.5L242.7,341.7L240.1,340.0L243.8,336.0L245.7,334.7L247.0,335.1L249.3,333.3L255.8,321.0L252.7,320.0L256.2,314.9L258.0,310.2L261.8,309.8L262.0,307.4L263.8,303.7L266.4,299.8L271.5,297.3L271.9,296.0L267.7,296.0L267.7,292.3L271.6,290.4L277.6,290.7L278.6,288.4L279.7,283.1L275.8,283.1L274.7,286.8L271.0,286.2L273.1,282.2L275.1,281.0L280.3,275.5L284.4,275.4L284.9,273.6L289.8,267.6L294.3,269.7L297.9,277.5L297.5,279.4L299.3,282.1L301.0,282.6L302.8,284.7L307.5,285.8L315.6,287.0L316.2,290.7L318.2,293.8L317.8,297.2L318.8,300.0L322.2,302.6L324.4,301.6L329.1,305.0L327.9,306.7L321.7,306.1L320.7,309.2L323.2,310.9L322.6,315.3L320.2,317.6L318.6,317.7L320.5,320.6L319.0,322.2L320.6,323.3L319.6,327.6L320.2,328.5L317.1,335.3L318.5,336.8L316.9,340.1L318.4,340.3L320.5,343.6L323.6,346.1L328.2,344.6L329.2,347.5L326.6,350.0L321.3,351.5Z","group":"main"},"嘉義縣":{"d":"M324.0,466.1L318.8,465.1L315.0,466.5L312.5,465.2L310.3,466.1L308.6,468.0L306.0,466.8L303.8,467.5L301.1,465.4L298.0,464.7L296.5,463.1L298.9,461.1L299.2,459.8L297.2,456.0L297.1,453.2L298.0,452.2L297.3,448.3L300.8,445.0L299.5,443.2L295.8,441.8L294.3,441.9L293.4,440.2L295.1,439.4L293.6,436.6L291.5,436.5L289.4,434.5L292.5,432.8L290.6,431.2L288.5,432.8L287.2,430.7L280.1,427.5L278.5,428.9L273.9,427.5L268.4,429.6L261.9,430.0L258.7,433.1L254.1,433.2L254.1,435.3L250.4,435.3L249.0,437.0L249.0,440.4L247.0,440.9L244.8,440.0L245.1,442.4L242.9,444.4L239.2,445.2L235.7,451.5L232.3,452.3L229.1,450.4L227.5,452.5L225.5,449.8L221.0,447.7L220.9,446.7L214.7,442.5L215.7,439.5L219.0,435.5L220.1,435.9L220.7,433.4L222.8,433.7L224.0,431.7L223.3,429.0L222.1,429.4L220.9,427.2L221.5,424.9L220.5,422.6L222.2,420.5L220.1,418.1L220.0,416.0L222.4,413.1L222.3,411.7L216.1,412.2L215.0,410.8L214.9,406.8L216.6,405.8L219.7,406.3L220.4,405.6L222.9,406.6L224.6,406.4L227.5,407.8L230.6,407.3L236.2,409.0L239.9,408.0L241.0,406.6L240.0,401.4L242.9,400.5L244.3,402.9L246.2,403.5L247.0,401.1L250.0,399.4L250.5,396.8L254.0,396.7L253.2,395.2L255.8,395.1L258.5,393.9L258.7,391.1L263.4,390.7L265.4,387.9L268.1,387.4L269.5,385.2L272.8,384.0L278.3,385.7L281.3,383.2L284.5,383.5L288.3,382.8L289.8,383.2L293.4,382.3L294.0,384.1L296.2,387.2L300.2,390.6L304.2,390.9L308.3,392.8L316.9,392.7L318.2,391.4L323.0,390.9L322.0,393.7L323.4,395.1L327.4,393.9L328.6,395.5L332.2,394.3L335.4,394.5L337.2,395.8L340.0,394.1L340.1,390.0L338.5,388.7L339.8,387.3L344.6,386.5L346.4,386.9L349.2,389.0L354.6,390.1L356.7,389.3L359.0,392.3L357.8,394.6L358.1,397.1L356.7,398.4L355.6,402.5L358.0,405.5L359.4,413.3L361.9,415.8L366.8,415.3L370.3,416.5L371.6,414.9L377.9,414.9L380.7,415.9L381.9,415.4L383.9,416.6L386.0,416.1L384.1,417.2L381.7,417.3L379.8,418.9L376.9,418.3L374.3,419.3L371.4,423.2L367.0,425.4L364.0,426.2L363.9,427.8L360.1,433.1L359.7,435.3L354.8,437.0L351.5,439.9L350.4,442.1L345.6,441.7L345.4,443.2L343.3,446.2L341.7,446.5L339.6,448.4L339.7,449.5L335.9,448.9L334.2,450.6L334.2,452.9L332.1,453.8L327.6,452.7L324.9,451.5L321.6,452.1L322.0,454.4L321.6,459.5L322.9,461.1L324.0,466.1ZM278.1,408.0L274.7,410.1L273.0,409.1L271.0,413.4L272.1,415.8L275.3,418.0L278.2,417.8L280.3,422.2L283.0,421.1L286.3,417.7L287.9,417.6L290.5,419.6L291.7,419.5L294.6,415.0L292.9,412.0L290.1,411.5L289.2,408.8L287.3,408.5L285.4,410.0L283.7,407.4L282.0,406.2L279.4,406.4L278.1,408.0Z","group":"main"},"新竹市":{"d":"M381.1,133.9L385.5,137.7L394.7,140.1L398.3,143.2L398.9,145.9L400.2,148.2L401.3,152.4L398.7,153.4L397.4,150.6L393.2,148.6L391.7,149.4L392.0,151.1L390.5,152.2L388.5,151.8L388.0,153.5L385.2,156.2L383.7,155.8L382.0,159.0L381.5,162.5L377.5,160.9L375.4,156.8L372.4,158.6L369.9,157.9L374.2,152.7L372.8,150.9L372.7,147.0L375.0,141.1L379.0,135.6L381.1,133.9Z","group":"main"},"連江縣":{"d":"M93.3,77.3L93.3,77.4L92.4,78.1L91.6,80.5L84.7,85.6L82.6,85.0L79.2,87.3L73.4,84.9L78.5,79.2L83.0,81.6L87.1,77.4L93.3,77.3ZM98.0,40.0L101.7,41.1L99.6,43.9L97.2,43.0L98.0,40.0ZM94.8,66.4L92.7,65.5L94.6,59.4L98.6,57.9L102.8,53.5L106.5,54.9L106.6,58.9L99.9,60.2L95.1,62.7L94.8,66.4ZM80.4,144.0L79.3,140.4L85.6,140.1L86.9,141.2L82.4,145.0L80.4,144.0Z","group":"island"},"金門縣":{"d":"M100.1,252.0L92.9,255.6L87.5,262.0L82.7,272.2L77.3,273.6L66.4,268.1L56.1,259.6L66.9,258.1L67.7,254.0L72.7,251.9L68.7,235.1L61.0,231.3L63.0,226.6L69.8,221.8L74.4,221.0L90.1,232.4L102.2,235.4L110.1,232.1L110.8,224.2L115.5,220.2L114.1,211.0L124.2,205.7L127.6,201.4L130.9,202.6L134.0,210.4L142.6,211.3L149.5,228.0L149.9,235.0L154.6,240.1L155.0,245.4L149.1,248.1L151.4,251.8L146.5,253.6L145.7,257.2L140.1,260.8L135.4,258.8L132.1,253.6L125.0,252.5L115.6,248.0L100.1,252.0ZM48.6,253.6L42.9,254.0L40.7,258.2L34.0,259.4L29.6,264.0L25.0,253.6L30.1,251.0L31.2,242.8L42.5,239.6L50.5,244.4L48.6,253.6Z","group":"island"},"澎湖縣":{"d":"M72.8,462.7L70.7,460.7L76.8,459.1L77.6,460.5L77.4,463.4L75.9,463.1L73.2,465.0L72.8,462.7ZM110.9,350.5L112.0,350.0L114.4,352.1L112.0,352.5L110.3,354.5L108.7,353.4L110.9,350.5ZM123.0,451.5L125.9,450.6L124.4,454.4L122.9,453.1L123.0,451.5ZM87.6,426.3L88.7,424.1L90.7,424.4L90.7,429.7L90.1,431.6L86.3,431.5L88.0,429.6L87.6,426.3ZM51.2,422.4L52.0,420.1L54.1,421.1L53.8,422.3L51.2,422.4ZM93.9,429.5L96.8,427.8L97.3,429.4L93.9,429.5ZM105.7,368.9L103.7,368.7L102.3,370.7L100.2,369.8L97.5,373.2L97.3,374.6L92.7,376.0L93.5,377.3L93.8,381.2L91.7,383.1L92.2,388.9L88.7,388.0L87.0,389.2L82.6,389.0L85.7,386.6L87.4,387.7L89.8,385.8L89.8,383.8L87.4,381.9L89.6,380.8L90.9,378.8L89.1,377.7L89.6,375.2L91.5,371.8L95.5,373.5L97.4,373.2L100.2,369.7L100.4,367.5L103.5,367.0L106.0,365.6L108.0,366.9L109.2,366.3L111.4,368.7L112.1,371.3L109.8,371.7L110.1,375.7L112.3,377.4L112.1,381.0L116.4,382.5L119.2,381.3L120.8,381.6L122.1,383.5L126.1,384.6L126.6,388.6L128.5,389.4L128.8,390.7L125.6,391.5L124.9,389.5L119.1,389.6L116.0,392.2L112.8,394.0L110.8,396.0L110.9,400.4L109.0,399.4L103.8,400.2L104.3,397.9L110.2,393.8L109.5,391.8L107.9,391.1L104.1,392.5L105.5,389.0L102.9,386.7L101.8,384.5L104.4,384.6L106.6,386.9L109.0,387.9L109.3,385.0L110.9,384.6L110.2,381.4L110.6,379.6L109.0,378.3L109.5,377.0L107.4,376.4L108.7,374.5L108.3,373.0L106.0,370.7L105.7,368.9Z","group":"island"}};
 
         // Regions definition
         const REGIONS = {
@@ -1818,16 +1885,68 @@
         let selectedCounty = '臺北市';
         let currentFilter = 'all';
         let searchQuery = '';
+        let weatherRequestInFlight = false;
+        let imageryInitialized = false;
+
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>'"]/g, char => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+            })[char]);
+        }
+
+        function parseCwaDateTime(value) {
+            if (!value) return null;
+            const normalized = value.includes('T') ? value : value.replace(' ', 'T');
+            const hasTimeZone = /(?:Z|[+-]\d{2}:?\d{2})$/.test(normalized);
+            const date = new Date(hasTimeZone ? normalized : `${normalized}+08:00`);
+            return Number.isNaN(date.getTime()) ? null : date;
+        }
+
+        function taipeiDateKey(date) {
+            const parts = new Intl.DateTimeFormat('en-CA', {
+                timeZone: TAIPEI_TIME_ZONE,
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            }).formatToParts(date);
+            const value = Object.fromEntries(parts.map(part => [part.type, part.value]));
+            return `${value.year}-${value.month}-${value.day}`;
+        }
+
+        function formatTaipeiTime(date) {
+            return date.toLocaleTimeString('zh-TW', {
+                timeZone: TAIPEI_TIME_ZONE,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+        }
 
         function formatPeriodLabel(startTimeStr, endTimeStr) {
-            try {
-                const s = new Date(startTimeStr.replace(/-/g, '/'));
-                const sh = s.getHours();
-                const dayStr = (s.getDate() === new Date().getDate()) ? '今天' : '明天';
-                return `${dayStr} ${sh}:00`;
-            } catch (err) {
-                return '預報時段';
-            }
+            const start = parseCwaDateTime(startTimeStr);
+            if (!start) return '預報時段';
+
+            const now = new Date();
+            const todayKey = taipeiDateKey(now);
+            const tomorrowKey = taipeiDateKey(new Date(now.getTime() + 24 * 60 * 60 * 1000));
+            const startKey = taipeiDateKey(start);
+            const dayLabel = startKey === todayKey
+                ? '今天'
+                : startKey === tomorrowKey
+                    ? '明天'
+                    : start.toLocaleDateString('zh-TW', {
+                        timeZone: TAIPEI_TIME_ZONE,
+                        month: 'numeric',
+                        day: 'numeric'
+                    });
+            const hour = start.toLocaleTimeString('zh-TW', {
+                timeZone: TAIPEI_TIME_ZONE,
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            });
+            return `${dayLabel} ${hour}`;
         }
 
         function parseLocation(loc) {
@@ -1871,44 +1990,105 @@
             };
         }
 
+        const COUNTY_PRIORITY = [
+            '基隆市', '臺北市', '新北市', '桃園市', '新竹市', '新竹縣', '苗栗縣',
+            '臺中市', '彰化縣', '南投縣', '雲林縣', '嘉義市', '嘉義縣',
+            '臺南市', '高雄市', '屏東縣', '宜蘭縣', '花蓮縣', '臺東縣',
+            '澎湖縣', '金門縣', '連江縣'
+        ];
+
+        function sortWeatherData(data) {
+            return data.sort((a, b) => {
+                const ia = COUNTY_PRIORITY.indexOf(a.name);
+                const ib = COUNTY_PRIORITY.indexOf(b.name);
+                return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+            });
+        }
+
+        function renderAllWeatherData() {
+            updateStats(parsedWeatherData);
+            renderCountyMap();
+            updateMapSidePanel(selectedCounty);
+            renderWeatherGrid();
+        }
+
+        function setWeatherStatus({ warning = false, message, detail = '' }) {
+            const badge = document.getElementById('connection-badge');
+            const sync = document.getElementById('global-sync-time');
+            const banner = document.getElementById('data-error-banner');
+            const bannerMessage = document.getElementById('data-error-message');
+
+            badge.classList.toggle('warning', warning);
+            badge.textContent = warning ? 'CWA 連線異常' : 'CWA 即時同步';
+            sync.textContent = message;
+            banner.hidden = !warning;
+            if (detail) bannerMessage.textContent = detail;
+        }
+
+        function saveWeatherCache() {
+            try {
+                localStorage.setItem(WEATHER_CACHE_KEY, JSON.stringify({
+                    savedAt: new Date().toISOString(),
+                    data: parsedWeatherData
+                }));
+            } catch (err) {
+                console.warn('無法儲存氣象快取:', err);
+            }
+        }
+
+        function loadWeatherCache() {
+            try {
+                const cached = JSON.parse(localStorage.getItem(WEATHER_CACHE_KEY));
+                if (!cached?.savedAt || !Array.isArray(cached.data) || cached.data.length !== EXPECTED_COUNTY_COUNT) return null;
+                return cached;
+            } catch (err) {
+                return null;
+            }
+        }
+
         // Fetch Weather API
         async function fetchWeather() {
+            if (weatherRequestInFlight) return;
+            weatherRequestInFlight = true;
             const refreshBtn = document.getElementById('refresh-btn');
             if (refreshBtn) refreshBtn.classList.add('spinning');
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
             try {
-                const res = await fetch(CWA_API_URL);
+                const res = await fetch(CWA_API_URL, {
+                    signal: controller.signal,
+                    cache: 'no-store'
+                });
                 if (!res.ok) throw new Error(`HTTP 錯誤: ${res.status}`);
                 const data = await res.json();
                 const locations = data.records?.location || [];
+                if (data.success === 'false' || locations.length !== EXPECTED_COUNTY_COUNT) {
+                    throw new Error(`預期 ${EXPECTED_COUNTY_COUNT} 縣市，實際取得 ${locations.length} 筆`);
+                }
 
-                parsedWeatherData = locations.map(parseLocation);
-
-                const priority = [
-                    '基隆市', '臺北市', '新北市', '桃園市', '新竹市', '新竹縣', '苗栗縣',
-                    '臺中市', '彰化縣', '南投縣', '雲林縣', '嘉義市', '嘉義縣',
-                    '臺南市', '高雄市', '屏東縣',
-                    '宜蘭縣', '花蓮縣', '臺東縣',
-                    '澎湖縣', '金門縣', '連江縣'
-                ];
-                parsedWeatherData.sort((a, b) => {
-                    const ia = priority.indexOf(a.name);
-                    const ib = priority.indexOf(b.name);
-                    return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
-                });
-
-                updateStats(parsedWeatherData);
-                renderSvgMapMarkers();
-                updateMapSidePanel(selectedCounty);
-                renderWeatherGrid();
-
-                const now = new Date();
-                const timeStr = now.toLocaleTimeString('zh-TW', { hour12: false });
-                document.getElementById('global-sync-time').textContent = `最新同步: ${timeStr}`;
+                parsedWeatherData = sortWeatherData(locations.map(parseLocation));
+                renderAllWeatherData();
+                saveWeatherCache();
+                setWeatherStatus({ message: `最新同步：${formatTaipeiTime(new Date())}` });
             } catch (err) {
                 console.error('API 連線失敗:', err);
-                document.getElementById('global-sync-time').textContent = '⚠️ 資料同步異常';
+                const cached = loadWeatherCache();
+                if (!parsedWeatherData.length && cached) {
+                    parsedWeatherData = sortWeatherData(cached.data);
+                    renderAllWeatherData();
+                }
+                const cachedTime = cached ? formatTaipeiTime(new Date(cached.savedAt)) : null;
+                setWeatherStatus({
+                    warning: true,
+                    message: cachedTime ? `顯示 ${cachedTime} 快取` : '尚無可用資料',
+                    detail: cachedTime
+                        ? '最新資料暫時無法取得，目前保留上一次成功同步的預報。'
+                        : '目前無法取得中央氣象署預報，請檢查網路後重新嘗試。'
+                });
             } finally {
+                clearTimeout(timeoutId);
+                weatherRequestInFlight = false;
                 if (refreshBtn) {
                     setTimeout(() => refreshBtn.classList.remove('spinning'), 500);
                 }
@@ -1954,42 +2134,53 @@
             document.getElementById('stat-rain-loc').textContent = maxRainLoc;
         }
 
-        // Render Interactive County Markers on SVG Taiwan Map
-        function renderSvgMapMarkers() {
-            const container = document.getElementById('map-markers-layer');
+        // Render an accurate, interactive county choropleth map.
+        function renderCountyMap() {
+            const container = document.getElementById('county-shapes-layer');
             if (!container) return;
 
-            let html = '';
-            parsedWeatherData.forEach(item => {
-                const coord = COUNTY_GEO_COORDS[item.name];
-                if (!coord) return;
+            container.innerHTML = parsedWeatherData.map(item => {
+                const map = COUNTY_MAP_PATHS[item.name];
+                if (!map) return '';
+                const isActive = item.name === selectedCounty;
+                return `<path class="county-area ${isActive ? 'active' : ''}"
+                    data-county="${escapeHtml(item.name)}"
+                    d="${map.d}"
+                    fill="${getTempColor(item.avgT)}"
+                    fill-opacity="0.72"
+                    role="button"
+                    tabindex="0"
+                    aria-label="${escapeHtml(item.name)}，首時段預報均溫 ${item.avgT} 度，${escapeHtml(item.current.wx)}"></path>`;
+            }).join('');
 
-                const shortName = item.name.replace('市', '').replace('縣', '');
-                const cur = item.current;
-                const tempColor = getTempColor(item.avgT);
-                const isActive = (item.name === selectedCounty);
-
-                html += `
-                    <g class="county-node ${isActive ? 'active' : ''}" 
-                       id="marker-${item.name}"
-                       onclick="selectCountyByName('${item.name}')">
-                        <!-- Pulse Halo -->
-                        <circle cx="${coord.x}" cy="${coord.y}" r="8" fill="${tempColor}" class="node-pin-pulse" />
-                        
-                        <!-- Center Anchor Pin -->
-                        <circle cx="${coord.x}" cy="${coord.y}" r="5.5" fill="${tempColor}" stroke="#ffffff" stroke-width="1.8" class="node-pin-circle" />
-                        
-                        <!-- Floating Glass Weather Chip -->
-                        <g transform="translate(${coord.x + 10}, ${coord.y - 14})">
-                            <rect x="0" y="0" width="70" height="26" class="node-chip-bg" />
-                            <text x="24" y="17" class="node-text-name">${shortName}</text>
-                            <text x="54" y="17" class="node-text-temp" fill="${tempColor}">${item.avgT}°</text>
-                        </g>
-                    </g>
-                `;
+            container.querySelectorAll('.county-area').forEach(path => {
+                const countyName = path.dataset.county;
+                const item = parsedWeatherData.find(entry => entry.name === countyName);
+                path.addEventListener('click', () => selectCountyByName(countyName));
+                path.addEventListener('keydown', event => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        selectCountyByName(countyName);
+                    }
+                });
+                path.addEventListener('pointermove', event => showMapTooltip(event, item));
+                path.addEventListener('pointerleave', hideMapTooltip);
             });
+        }
 
-            container.innerHTML = html;
+        function showMapTooltip(event, item) {
+            if (!item) return;
+            const box = document.querySelector('.taiwan-svg-box');
+            const tooltip = document.getElementById('map-hover-tooltip');
+            const rect = box.getBoundingClientRect();
+            tooltip.innerHTML = `<strong>${escapeHtml(item.name)}</strong><span>${item.avgT}°C</span> · ${escapeHtml(item.current.wx)}`;
+            tooltip.hidden = false;
+            tooltip.style.left = `${Math.min(event.clientX - rect.left, rect.width - 150)}px`;
+            tooltip.style.top = `${Math.min(event.clientY - rect.top, rect.height - 80)}px`;
+        }
+
+        function hideMapTooltip() {
+            document.getElementById('map-hover-tooltip').hidden = true;
         }
 
         // Select County and update Side Panel
@@ -1997,10 +2188,11 @@
             selectedCounty = countyName;
 
             // Highlight in SVG
-            document.querySelectorAll('.county-node').forEach(node => {
+            document.querySelectorAll('.county-area').forEach(node => {
                 node.classList.remove('active');
             });
-            const activeNode = document.getElementById(`marker-${countyName}`);
+            const activeNode = [...document.querySelectorAll('.county-area')]
+                .find(node => node.dataset.county === countyName);
             if (activeNode) activeNode.classList.add('active');
 
             // Update Quick Chips
@@ -2039,7 +2231,7 @@
                     <span class="period-item-time">${formatPeriodLabel(p.startTime, p.endTime)}</span>
                     <div class="period-item-wx">
                         <span>${getWeatherIcon(p.wx)}</span>
-                        <span>${p.wx}</span>
+                        <span>${escapeHtml(p.wx)}</span>
                     </div>
                     <span class="period-item-temp">${p.minT}° ~ ${p.maxT}°C</span>
                     <span style="color: #38bdf8; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">💧${p.pop}%</span>
@@ -2071,37 +2263,63 @@
 
         let currentActiveImageKey = 'radar-tw';
 
-        function switchLiveImage(key) {
+        function initializeImagery() {
+            if (imageryInitialized) return;
+            imageryInitialized = true;
+            document.querySelectorAll('.thumb-img-wrapper img[data-src]').forEach(img => {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+            });
+            switchLiveImage(currentActiveImageKey);
+        }
+
+        function switchLiveImage(key, { forceRefresh = false } = {}) {
             currentActiveImageKey = key;
             const imgData = IMAGERY_SOURCES[key];
             if (!imgData) return;
 
             const mainImg = document.getElementById('main-live-image');
             const caption = document.getElementById('active-image-caption');
+            const loadStatus = document.getElementById('image-load-status');
+            const requestedUrl = forceRefresh ? `${imgData.url}?t=${Date.now()}` : imgData.url;
 
             mainImg.style.opacity = '0.3';
-            // Cache buster
-            mainImg.src = `${imgData.url}?t=${Date.now()}`;
+            loadStatus.hidden = false;
+            loadStatus.textContent = '正在載入最新圖資…';
             mainImg.onload = () => {
                 mainImg.style.opacity = '1';
+                loadStatus.hidden = true;
             };
+            mainImg.onerror = () => {
+                mainImg.style.opacity = '0.16';
+                loadStatus.hidden = false;
+                loadStatus.textContent = '圖資暫時無法載入，請稍後重新整理。';
+            };
+            if (mainImg.src !== requestedUrl || forceRefresh) {
+                mainImg.src = requestedUrl;
+            } else if (mainImg.complete && mainImg.naturalWidth > 0) {
+                mainImg.style.opacity = '1';
+                loadStatus.hidden = true;
+            }
             caption.textContent = imgData.caption;
 
             // Update Tabs
             document.querySelectorAll('.img-tab-btn').forEach(btn => {
-                if (btn.dataset.img === key) btn.classList.add('active');
-                else btn.classList.remove('active');
+                const active = btn.dataset.img === key;
+                btn.classList.toggle('active', active);
+                btn.setAttribute('aria-pressed', String(active));
             });
 
             // Update Thumbnails
             document.querySelectorAll('.thumb-card').forEach(card => {
-                if (card.getAttribute('onclick')?.includes(key)) card.classList.add('active');
-                else card.classList.remove('active');
+                const active = card.dataset.img === key;
+                card.classList.toggle('active', active);
+                card.setAttribute('aria-pressed', String(active));
             });
         }
 
         function refreshActiveImage() {
-            switchLiveImage(currentActiveImageKey);
+            switchLiveImage(currentActiveImageKey, { forceRefresh: true });
         }
 
         document.getElementById('imagery-tabs')?.addEventListener('click', (e) => {
@@ -2111,6 +2329,11 @@
             }
         });
 
+        document.querySelector('.imagery-thumbnails-grid')?.addEventListener('click', (e) => {
+            const card = e.target.closest('.thumb-card');
+            if (card?.dataset.img) switchLiveImage(card.dataset.img);
+        });
+
         // ========================================================
         // VIEW MODE SWITCHING
         // ========================================================
@@ -2118,13 +2341,17 @@
             const btn = e.target.closest('.mode-btn');
             if (!btn || !btn.dataset.view) return;
 
-            document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            document.querySelectorAll('.mode-btn').forEach(b => {
+                const active = b === btn;
+                b.classList.toggle('active', active);
+                b.setAttribute('aria-selected', String(active));
+            });
 
             const targetViewId = btn.dataset.view;
             document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
             const activeSection = document.getElementById(targetViewId);
             if (activeSection) activeSection.classList.add('active');
+            if (targetViewId === 'imagery-view') initializeImagery();
         });
 
         // ========================================================
@@ -2145,11 +2372,10 @@
             }
 
             if (!filtered.length) {
-                grid.innerHTML = `
-                    <div style="grid-column: 1/-1; padding: 60px; text-align: center; color: var(--text-muted);">
-                        查無符合關鍵字「${searchQuery}」的縣市資料
-                    </div>
-                `;
+                const emptyState = document.createElement('div');
+                emptyState.style.cssText = 'grid-column:1/-1;padding:60px;text-align:center;color:var(--text-muted);';
+                emptyState.textContent = `查無符合關鍵字「${searchQuery}」的縣市資料`;
+                grid.replaceChildren(emptyState);
                 return;
             }
 
@@ -2169,8 +2395,8 @@
                     <article class="weather-card">
                         <div class="card-top">
                             <div class="location-info">
-                                <div class="location-name">${item.name}</div>
-                                <div class="location-region">${item.region}</div>
+                                <div class="location-name">${escapeHtml(item.name)}</div>
+                                <div class="location-region">${escapeHtml(item.region)}</div>
                             </div>
                             <div class="weather-status-icon">${icon}</div>
                         </div>
@@ -2188,7 +2414,7 @@
 
                         <div class="weather-desc-badge">
                             <span>${icon}</span>
-                            <span>${cur.wx}</span>
+                            <span>${escapeHtml(cur.wx)}</span>
                         </div>
 
                         <div class="card-metrics">
@@ -2198,7 +2424,7 @@
                             </div>
                             <div class="metric-item">
                                 <div class="metric-label">舒適度評級</div>
-                                <div class="comfort-chip">${cur.ci || '舒適'}</div>
+                                <div class="comfort-chip">${escapeHtml(cur.ci || '舒適')}</div>
                             </div>
                         </div>
 
@@ -2213,8 +2439,11 @@
         document.getElementById('region-tabs')?.addEventListener('click', (e) => {
             const btn = e.target.closest('.region-btn');
             if (!btn) return;
-            document.querySelectorAll('.region-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            document.querySelectorAll('.region-btn').forEach(b => {
+                const active = b === btn;
+                b.classList.toggle('active', active);
+                b.setAttribute('aria-pressed', String(active));
+            });
             currentFilter = btn.dataset.region;
             renderWeatherGrid();
         });
@@ -2229,8 +2458,12 @@
 
         // Auto Refresh weather data every 10 minutes
         setInterval(fetchWeather, 10 * 60 * 1000);
-        // Auto Refresh live radar/satellite images every 5 minutes
-        setInterval(refreshActiveImage, 5 * 60 * 1000);
+        // Refresh imagery only while its view is open, avoiding background downloads.
+        setInterval(() => {
+            if (document.getElementById('imagery-view').classList.contains('active')) {
+                refreshActiveImage();
+            }
+        }, 5 * 60 * 1000);
     </script>
 </body>
 </html>
